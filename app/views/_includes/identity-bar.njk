@@ -1,0 +1,24 @@
+
+{% set title %}
+  <span class="govuk-!-margin-right-1">{{application.id}}</span>
+  <b class="govuk-!-margin-right-1">{{application.name}}</b>
+  {{govukTag({ classes: application.status | statusColour, text: application.status })}}
+{% endset %}
+
+  {{ appIdentityBar({
+    title: {
+      html: title
+    },
+    menus: [{
+      items: [{
+        text: 'Publish latest changes',
+        action: '/applications/'+application.id+'/shortlist'
+      }]
+    }, {
+      items: [{
+        text: 'Unpublish',
+        href: '/applications/' + application.id + '/reject',
+        classes: 'govuk-button--secondary'
+      }]
+    }] if false
+  }) }}

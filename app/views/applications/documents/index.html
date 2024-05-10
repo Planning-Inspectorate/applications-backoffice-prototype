@@ -1,0 +1,149 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Documents" %}
+{% set primaryNavId = 'applications' %}
+{% set secondaryNavId = 'documentation' %}
+
+{% block header %}
+  {% include "_includes/header.njk" %}
+  {% include "_includes/primary-navigation.njk" %}
+  {% include "_includes/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    html: '<h2 class="govuk-heading-m">' + flash + '</h2>'
+  }) if flash.length }}
+
+  {% include "_includes/secondary-navigation.njk" %}
+
+  {{appPageHeader({
+    heading: {
+      text: pageName,
+      classes: 'govuk-heading-l'
+    },
+    items: [{
+      text: 'Upload document',
+      href: '/applications/new'
+    }]
+  })}}
+
+  <div class="app-filter-layout">
+    <div class="app-filter-layout__filter">
+      {% include "_includes/document-filter-panel.njk" %}
+    </div>
+    <div class="app-filter-layout__content">
+
+      {% include "_includes/document-search-form.njk" %}
+
+      <div class="app-action-bar">
+        <div class="app-action-bar__filter"></div>
+        {{appButtonMenu({
+          items: [{
+            text: 'Mark as not checked',
+            classes: 'govuk-button--secondary'
+          }, {
+            text: 'Mark as checked',
+            classes: 'govuk-button--secondary'
+          }, {
+            text: 'Mark as ready to publish',
+            classes: 'govuk-button--secondary'
+          }, {
+            text: 'Mark as do not publish',
+            classes: 'govuk-button--secondary'
+          }]
+        })}}
+      </div>
+
+      {% if documents.length %}
+        <div class="app-list">
+          {% for document in documents %}
+            <div class="app-list__item">
+              <h2 class="govuk-heading-m">
+                <a href="/applications/{{application.id}}">
+                  {{document.name}}
+                </a>
+              </h2>
+
+              {{ govukTag({
+                text: document.status,
+                classes: document.status | statusColour
+              }) }}
+
+              {{ govukSummaryList({
+                classes: "govuk-summary-list--no-border",
+                rows: [
+                  {
+                    key: {
+                      text: "Reference number"
+                    },
+                    value: {
+                      text: application.id
+                    }
+                  },
+                  {
+                    key: {
+                      text: "Sector"
+                    },
+                    value: {
+                      text: application.sector
+                    }
+                  },
+                  {
+                    key: {
+                      text: "Date created"
+                    },
+                    value: {
+                      text: application.sentDate | govukDate + ' at ' + application.sentDate | govukTime
+                    }
+                  }
+                ]
+              }) }}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no results.</p>
+      {% endif %}
+
+
+      {% if pagination.pageItems > 1 %}
+        {% include "_includes/pagination.njk" %}
+      {% endif %}
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new AppFrontend.FilterToggleButton({
+      bigModeMediaQuery: '(min-width: 48.063em)',
+      startHidden: false,
+      toggleButton: {
+        container: $('.app-action-bar__filter'),
+        showText: 'Show filter',
+        hideText: 'Hide filter',
+        classes: 'govuk-button--secondary govuk-!-margin-bottom-3'
+      },
+      closeButton: {
+        container: $('.app-filter__header-action'),
+        text: 'Close'
+      },
+      filter: {
+        container: $('.app-filter-layout__filter')
+      }
+    })
+    new AppFrontend.ButtonMenu({
+      container: $(".app-button-menu").eq(3),
+      mq: "(min-width: 1000em)",
+      buttonText: "Mark documents",
+      buttonClasses:
+        "govuk-button--secondary app-button-menu__toggle-button--secondary",
+      menuClasses: "app-button-menu__wrapper--righ",
+    });
+  </script>
+{% endblock %}

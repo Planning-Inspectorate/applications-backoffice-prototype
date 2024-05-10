@@ -1,0 +1,37 @@
+{{ xGovukSecondaryNavigation({
+  classes: 'app-secondary-nav govuk-!-margin-bottom-6',
+  visuallyHiddenTitle: "Secondary menu",
+  items: [{
+    text: "Overview",
+    href: '/applications/'+application.id,
+    current: secondaryNavId == 'overview'
+  }, {
+    text: "Key dates",
+    href: '/applications/'+application.id+'/key-dates',
+    current: secondaryNavId == 'keyDates'
+  }, {
+    text: "Team",
+    href: '/applications/'+application.id+'/team',
+    current: secondaryNavId == 'team'
+  }, {
+    text: "Documents",
+    href: '/applications/'+application.id+'/documents',
+    current: secondaryNavId == 'documentation'
+  }, {
+    text: "S51 advice",
+    href: '/applications/'+application.id+'/documents',
+    current: secondaryNavId == 'rel'
+  }, {
+    text: "Relevant representations",
+    href: '/applications/'+application.id+'/documents',
+    current: secondaryNavId == 'rel'
+  }, {
+    text: "Updates",
+    href: '/applications/'+application.id+'/updates',
+    current: secondaryNavId == 'updates'
+  }, {
+    text: "Timetable",
+    href: '/applications/'+application.id+'/timetable',
+    current: secondaryNavId == 'timetable'
+  }]
+}) }}

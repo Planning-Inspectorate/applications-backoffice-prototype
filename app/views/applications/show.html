@@ -1,0 +1,310 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = application.name %}
+{% set primaryNavId = 'applications' %}
+{% set secondaryNavId = 'overview' %}
+
+{% block header %}
+  {% include "_includes/header.njk" %}
+  {% include "_includes/primary-navigation.njk" %}
+  {% include "_includes/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    html: '<h2 class="govuk-heading-m">' + flash + '</h2>'
+  }) if flash.length }}
+
+  {% include "_includes/secondary-navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Overview</h1>
+
+      {% if application.status != 'Draft' %}
+        <div class="govuk-button-group">
+          {{ govukButton({
+            text: "Publish latest changes",
+            href: "/applications/" + application.id + "/approve"
+          }) }}
+          <a class="govuk-link" href="#">Unpublish</a>
+        </div>
+      {% endif %}
+
+      {# {% if application.status == 'Approved' %}
+        <p>Application approved on {{application.approvedDate | govukDate}} at {{application.approvedDate | govukTime}}.</p>
+      {% endif %}
+
+      {% if application.status == 'Rejected' %}
+        <p>Application rejected on {{application.rejectedDate | govukDate}} at {{application.rejectedDate | govukTime}}.</p>
+      {% endif %} #}
+
+      {# <h2 class="govuk-heading-m">Project details</h2> #}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Reference number"
+            },
+            value: {
+              text: application.id
+            }
+          },
+          {
+            key: {
+              text: "Publish date"
+            },
+            value: {
+              text: application.sentDate | govukDate + ' at ' + application.sentDate | govukTime
+            }
+          },
+          {
+            key: {
+              text: "Sector"
+            },
+            value: {
+              text: application.sector
+            }
+          },
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: application.name
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Description"
+            },
+            value: {
+              text: application.description
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: application.emailAddress
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Location"
+            },
+            value: {
+              text: application.location
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Grid references"
+            },
+            value: {
+              html: application.gridReference.easting + ' (Easting) ' + '<br>' + application.gridReference.northing + ' (Northing) '
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Regions"
+            },
+            value: {
+              text: application.regions | join(', ')
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Map zoom level"
+            },
+            value: {
+              text: application.mapZoom
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      <h2 class="govuk-heading-m">Applicant information</h2>
+
+      {% set address %}
+        {{appAddress({ address: application.applicant.address })}}
+      {% endset %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Organisation"
+            },
+            value: {
+              text: application.applicant.organisation
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Contact name"
+            },
+            value: {
+              text: application.applicant.firstName + ' ' + application.applicant.lastName
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: application.applicant.emailAddress
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Website URL"
+            },
+            value: {
+              text: application.applicant.website
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Phone number"
+            },
+            value: {
+              text: application.applicant.phoneNumber
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: address
+            },
+            actions: {
+              items: [
+                {
+                  href: "#",
+                  text: "Change",
+                  visuallyHiddenText: "name"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}

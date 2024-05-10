@@ -1,0 +1,37 @@
+//
+// For guidance on how to add CSS and SCSS see:
+// https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
+//
+
+$app-images-path: "/public/images/";
+
+// Add extra styles here
+@import "components/hidden.scss";
+@import "components/list.scss";
+@import "components/header.scss";
+@import "components/action-bar.scss";
+@import "components/filter-layout.scss";
+@import "components/filter-panel.scss";
+@import "components/search-form.scss";
+@import "components/page-header.scss";
+@import "components/button-menu.scss";
+@import "components/identity-bar.scss";
+
+h1 .govuk-tag {
+  vertical-align: middle;
+}
+
+.app-secondary-nav {
+  margin-top: -35px;
+}
+
+.app-user-card {
+  border-bottom: 1px solid govuk-colour('mid-grey');
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.app-user-card:first-of-type {
+  border-top: 1px solid govuk-colour('mid-grey');
+  padding-top: 10px;
+}

@@ -1,0 +1,25 @@
+{#
+For guidance on how to use layouts see:
+https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
+#}
+
+{% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% from "_components/address/macro.njk" import appAddress %}
+{% from "_components/page-header/macro.njk" import appPageHeader %}
+{% from "_components/identity-bar/macro.njk" import appIdentityBar %}
+{% from "_components/button-menu/macro.njk" import appButtonMenu %}
+
+{% block header %}
+  {% include "_includes/header.njk" %}
+  {% include "_includes/primary-navigation.njk" %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    var AppFrontend = {}
+  </script>
+  <script src="/public/javascripts/components/filter-toggle-button.js"></script>
+  <script src="/public/javascripts/components/button-menu.js"></script>
+{% endblock %}

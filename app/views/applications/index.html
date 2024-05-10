@@ -1,0 +1,110 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Projects" %}
+{% set primaryNavId = "applications" %}
+
+{% block content %}
+
+  {{appPageHeader({
+    heading: {
+      text: pageName,
+      classes: 'govuk-heading-l'
+    },
+    items: [{
+      text: 'Create project',
+      href: '/applications/new'
+    }]
+  })}}
+
+  <div class="app-filter-layout">
+    <div class="app-filter-layout__filter">
+      {% include "_includes/filter-panel.njk" %}
+    </div>
+    <div class="app-filter-layout__content">
+
+      {% include "_includes/search-form.njk" %}
+
+      <div class="app-action-bar">
+        <div class="app-action-bar__filter"></div>
+      </div>
+
+      {% if applications.length %}
+        <div class="app-list">
+          {% for application in applications %}
+            <div class="app-list__item">
+              <h2 class="govuk-heading-m">
+                <a href="/applications/{{application.id}}">
+                  {{application.name}}
+                </a>
+              </h2>
+
+              {{ govukTag({
+                text: application.status,
+                classes: application.status | statusColour
+              }) }}
+
+              {{ govukSummaryList({
+                classes: "govuk-summary-list--no-border",
+                rows: [
+                  {
+                    key: {
+                      text: "Reference number"
+                    },
+                    value: {
+                      text: application.id
+                    }
+                  },
+                  {
+                    key: {
+                      text: "Sector"
+                    },
+                    value: {
+                      text: application.sector
+                    }
+                  },
+                  {
+                    key: {
+                      text: "Date created"
+                    },
+                    value: {
+                      text: application.sentDate | govukDate + ' at ' + application.sentDate | govukTime
+                    }
+                  }
+                ]
+              }) }}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>There are no results.</p>
+      {% endif %}
+
+      {% include "_includes/pagination.njk" %}
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{super()}}
+  <script>
+    new AppFrontend.FilterToggleButton({
+      bigModeMediaQuery: '(min-width: 48.063em)',
+      startHidden: false,
+      toggleButton: {
+        container: $('.app-action-bar__filter'),
+        showText: 'Show filter',
+        hideText: 'Hide filter',
+        classes: 'govuk-button--secondary govuk-!-margin-bottom-3'
+      },
+      closeButton: {
+        container: $('.app-filter__header-action'),
+        text: 'Close'
+      },
+      filter: {
+        container: $('.app-filter-layout__filter')
+      }
+    })
+  </script>
+{% endblock %}

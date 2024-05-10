@@ -1,0 +1,80 @@
+{% extends "layouts/main.html" %}
+
+{# {% set pageName = "Check details and update applicant name" %} #}
+{% set pageName = "Check your answers before you send the request" %}
+{% set primaryNavId = 'applications' %}
+
+{% set applicationUrl = "/applications/" + application.id %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: applicationUrl + '/edit-name'
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <span class="govuk-caption-l">
+        {# Update applicant details - {{application.personalDetails.firstName}} #}
+        {# {{application.personalDetails.lastName}} #}
+      </span>
+      <h1 class="govuk-heading-l">{{ pageName }}</h1>
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "First name",
+              text: "Withdrawal request"
+            },
+            value: {
+              text: data.editName.firstName,
+              html: '<a href="">request.pdf</a>'
+            },
+            actions: {
+              items: [
+                {
+                  href: "/applications/" + application.id + '/edit-name',
+                  text: "Change",
+                  visuallyHiddenText: "First name"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Withdrawal date"
+            },
+            value: {
+              text: data.editName.lastName,
+              html: '25 March 2024'
+            },
+            actions: {
+              items: [
+                {
+                  href: "/applications/" + application.id + '/edit-name',
+                  text: "Change",
+                  visuallyHiddenText: "Last name"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+      <form method="post">
+        {{ govukButton({
+          text: "Send request"
+        }) }}
+      </form>
+
+      {# <p><a href="{{applicationUrl}}">Cancel</a></p> #}
+
+    </div>
+  </div>
+
+{% endblock %}
