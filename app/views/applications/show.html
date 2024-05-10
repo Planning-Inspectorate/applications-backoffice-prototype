@@ -23,7 +23,7 @@
 
       <h1 class="govuk-heading-l">Overview</h1>
 
-      {% if application.status != 'Draft' %}
+      {# {% if application.status != 'Draft' %}
         <div class="govuk-button-group">
           {{ govukButton({
             text: "Publish latest changes",
@@ -31,7 +31,7 @@
           }) }}
           <a class="govuk-link" href="#">Unpublish</a>
         </div>
-      {% endif %}
+      {% endif %} #}
 
       {# {% if application.status == 'Approved' %}
         <p>Application approved on {{application.approvedDate | govukDate}} at {{application.approvedDate | govukTime}}.</p>
