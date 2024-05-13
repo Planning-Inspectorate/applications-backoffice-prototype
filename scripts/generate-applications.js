@@ -98,6 +98,25 @@ const generateApplication = () => {
     }
   }
 
+  // Updates
+  application.updates = []
+  if(faker.helpers.arrayElement(['Yes', 'No']) == 'Yes') {
+    for(var i = 0; i < faker.number.int({ min: 1, max: 20 }); i++) {
+
+      let update =  {
+        status: faker.helpers.arrayElement(['Draft', 'Ready to publish', 'Published']),
+        notifySubscribers: faker.helpers.arrayElement(true, false),
+        description: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n')
+      }
+
+      if(update.status == 'Published') {
+        update.publishDate = faker.date.recent()
+      }
+
+      application.updates.push(update)
+    }
+  }
+
   return application
 }
 

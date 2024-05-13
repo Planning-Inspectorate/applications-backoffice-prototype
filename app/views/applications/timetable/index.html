@@ -1,0 +1,34 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = application.name %}
+{% set primaryNavId = 'applications' %}
+{% set secondaryNavId = 'timetable' %}
+
+{% block header %}
+  {{super()}}
+  {% include "_includes/identity-bar.njk" %}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    html: '<h2 class="govuk-heading-m">' + flash + '</h2>'
+  }) if flash.length }}
+
+  {% include "_includes/secondary-navigation.njk" %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Timetable</h1>
+
+      {{ govukButton({
+        text: "Create timetable item"
+      }) }}
+
+      <p>No timetable items.</p>
+
+    </div>
+  </div>
+
+{% endblock %}

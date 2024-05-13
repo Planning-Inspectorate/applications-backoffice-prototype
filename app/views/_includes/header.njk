@@ -9,7 +9,14 @@
   serviceUrl: serviceUrl,
   navigationClasses: "govuk-header__navigation--end",
   navigation: [{
+    href: '/account/sign-in',
+    text: 'Sign in'
+  } if not data.user, {
+    href: '/applications',
+    text: 'Projects',
+    active: primaryNavId == 'applications'
+  } if data.user, {
     href: '/account/sign-out',
     text: 'Sign out'
-  }] if data.user
+  } if data.user]
 }) }}
