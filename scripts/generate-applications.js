@@ -82,24 +82,20 @@ const generateApplication = () => {
 
   application.applicant.website = faker.internet.url()
 
-
-  // Evidence
-  application.evidence = {}
-  application.evidence.hasEvidence = faker.helpers.arrayElement([
-    'Yes',
-    'No'
-  ])
-  if(application.evidence.hasEvidence == 'Yes') {
-    application.evidence.files = [{
-      name: 'trick-performance.mp4',
-      size: '5MB'
-    }, {
-      name: 'juggling-show.mp4',
-      size: '32MB'
-    }, {
-      name: 'testimonial.mp3',
-      size: '2MB'
-    }]
+  // Documents
+  application.documents = []
+  if(faker.helpers.arrayElement(['Yes', 'No']) == 'Yes') {
+    for(var i = 0; i < faker.number.int({ min: 1, max: 20 }); i++) {
+      application.documents.push(
+        {
+          status: faker.helpers.arrayElement(['Published', 'Ready to publish', 'Checked', 'Not checked', 'Do not publish']),
+          receivedDate: application.sentDate = faker.date.recent(),
+          name: faker.system.commonFileName(),
+          size: '5MB',
+          description: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n')
+        }
+      )
+    }
   }
 
   return application

@@ -6,7 +6,6 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
 const addFilter = govukPrototypeKit.views.addFilter
 
-// Add your filters here
 addFilter('statusColour', status => {
   switch(status) {
     case 'Draft':
@@ -21,5 +20,20 @@ addFilter('statusColour', status => {
       return 'govuk-tag--green'
     case 'Recommendation':
       return 'govuk-tag--pink'
+  }
+})
+
+addFilter('documentStatusColour', status => {
+  switch(status) {
+    case 'Published':
+      return 'govuk-tag--green'
+    case 'Ready to publish':
+      return 'govuk-tag--blue'
+    case 'Not checked':
+      return 'govuk-tag--purple'
+    case 'Checked':
+      return 'govuk-tag--pink'
+    case 'Do not publish':
+      return 'govuk-tag--red'
   }
 })

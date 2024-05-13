@@ -5,23 +5,9 @@ module.exports = router => {
 
   router.get('/applications/:applicationId/documents', (req, res) => {
     let application = req.session.data.applications.find(application => application.id === req.params.applicationId)
-    let documents = application.documents || [{
-      name: 'hello'
-    }, {
-      name: 'hello'
-    }, {
-      name: 'hello'
-    }]
 
-    // let emailAddress = _.get(req.session.data.search, 'emailAddress')
+    let documents = application.documents
 
-    // if(emailAddress) {
-    //   applications = applications.filter(application => {
-    //     return application.personalDetails.emailAddress.indexOf(emailAddress) > -1
-    //   })
-    // }
-
-    // ['Received', ...]
     let selectedStatusFilters = _.get(req.session.data.filters, 'statuses')
     let selectedSectorFilters = _.get(req.session.data.filters, 'sectors')
 

@@ -25,7 +25,7 @@
     },
     items: [{
       text: 'Upload document',
-      href: '/applications/new'
+      href: '/applications/' + application.id + '/documents/new'
     }]
   })}}
 
@@ -68,7 +68,7 @@
 
               {{ govukTag({
                 text: document.status,
-                classes: document.status | statusColour
+                classes: document.status | documentStatusColour
               }) }}
 
               {{ govukSummaryList({
@@ -76,26 +76,18 @@
                 rows: [
                   {
                     key: {
-                      text: "Reference number"
+                      text: "Date received"
                     },
                     value: {
-                      text: application.id
+                      text: document.receivedDate | govukDate + ' at ' + document.receivedDate | govukTime
                     }
                   },
                   {
                     key: {
-                      text: "Sector"
+                      text: "File size"
                     },
                     value: {
-                      text: application.sector
-                    }
-                  },
-                  {
-                    key: {
-                      text: "Date created"
-                    },
-                    value: {
-                      text: application.sentDate | govukDate + ' at ' + application.sentDate | govukTime
+                      text: document.size
                     }
                   }
                 ]
@@ -104,9 +96,8 @@
           {% endfor %}
         </div>
       {% else %}
-        <p>There are no results.</p>
+        <p>There are no documents.</p>
       {% endif %}
-
 
       {% if pagination.pageItems > 1 %}
         {% include "_includes/pagination.njk" %}
