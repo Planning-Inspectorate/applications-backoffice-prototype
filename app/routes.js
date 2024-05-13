@@ -9,6 +9,11 @@ router.all('*', (req, res, next) => {
   next()
 })
 
+router.get('/clear-all-data', (req, res) => {
+  req.session.data = require('./data/applications.json')
+  res.redirect('/account/sign-in')
+})
+
 require('./routes/account')(router)
 require('./routes/applications')(router)
 require('./routes/application--approve')(router)

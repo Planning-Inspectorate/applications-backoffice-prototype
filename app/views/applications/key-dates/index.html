@@ -5,8 +5,7 @@
 {% set secondaryNavId = 'keyDates' %}
 
 {% block header %}
-  {% include "_includes/header.njk" %}
-  {% include "_includes/primary-navigation.njk" %}
+  {{super()}}
   {% include "_includes/identity-bar.njk" %}
 {% endblock %}
 

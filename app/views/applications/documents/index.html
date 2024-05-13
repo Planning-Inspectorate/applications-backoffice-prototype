@@ -5,8 +5,7 @@
 {% set secondaryNavId = 'documentation' %}
 
 {% block header %}
-  {% include "_includes/header.njk" %}
-  {% include "_includes/primary-navigation.njk" %}
+  {{super()}}
   {% include "_includes/identity-bar.njk" %}
 {% endblock %}
 
@@ -39,6 +38,9 @@
 
       <div class="app-action-bar">
         <div class="app-action-bar__filter"></div>
+
+
+
         {{appButtonMenu({
           items: [{
             text: 'Mark as not checked',
@@ -53,7 +55,7 @@
             text: 'Mark as do not publish',
             classes: 'govuk-button--secondary'
           }]
-        })}}
+        }) if documents.length > 0}}
       </div>
 
       {% if documents.length %}
@@ -96,7 +98,7 @@
           {% endfor %}
         </div>
       {% else %}
-        <p>There are no documents.</p>
+        <p>There are no results.</p>
       {% endif %}
 
       {% if pagination.pageItems > 1 %}

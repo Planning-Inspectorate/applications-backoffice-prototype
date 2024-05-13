@@ -5,11 +5,9 @@
 {% set secondaryNavId = 'updates' %}
 
 {% block header %}
-  {% include "_includes/header.njk" %}
-  {% include "_includes/primary-navigation.njk" %}
+  {{super()}}
   {% include "_includes/identity-bar.njk" %}
 {% endblock %}
-
 {% block content %}
   {{ govukNotificationBanner({
     type: "success",
