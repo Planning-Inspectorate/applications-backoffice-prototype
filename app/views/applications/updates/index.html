@@ -33,20 +33,16 @@
 
         {% set notifyText %}
           {% if update.notifySubscribers %}
-            {% if update.status == 'Published' %}
-              Email sent to subscribers
-            {% else %}
-              An email will be sent to subscribers
-            {% endif %}
+            Yes
           {% else %}
-            An email will not be sent to subscribers
+            No
           {% endif %}
         {% endset %}
 
           <div class="app-list__item">
             <h2 class="govuk-heading-s">
               <a href="/applications/{{application.id}}/updates/{{update.id}}">
-                {{update.description | truncate(100) }}
+                {{update.description | truncate(50) }}
               </a>
             </h2>
 

@@ -8,6 +8,8 @@
     position: relative;
   }
 
+
+
   h2 {
     margin-bottom: govuk-spacing(1);
     margin-right: 120px;
@@ -29,4 +31,24 @@
     padding-bottom: 0;
   }
 
+}
+
+
+.app-list--checkboxes {
+
+  .app-list__item {
+    // display: flex;
+  }
+
+  .govuk-checkboxes {
+    float: left;
+  }
+
+  .app-list__contents {
+    h2 {
+      margin-top: 5px;
+      left: -15px;
+      position: relative;
+    }
+  }
 }
