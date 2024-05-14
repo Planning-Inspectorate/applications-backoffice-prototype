@@ -3,29 +3,11 @@ const Pagination = require('../helpers/pagination')
 
 module.exports = router => {
 
-  router.get('/applications', (req, res) => {
-    let applications = req.session.data.applications
+  router.get('/applications/:applicationId/comments', (req, res) => {
+    let application = req.session.data.applications.find(application => application.id === req.params.applicationId)
 
-    let keyWords = _.get(req.session.data.search, 'keyWords')
+    let comments = application.documents
 
-    if(keyWords) {
-      let applicationsByName = applications.filter(application => {
-        return application.name.indexOf(keyWords) > -1
-      })
-
-      let applicationsByReference = applications.filter(application => {
-        return application.id.indexOf(keyWords) > -1
-      })
-
-      if(applicationsByName.length > 0) {
-        applications = applicationsByName
-      } else {
-        applications = applicationsByReference
-      }
-
-    }
-
-    // ['Received', ...]
     let selectedStatusFilters = _.get(req.session.data.filters, 'statuses')
     let selectedSectorFilters = _.get(req.session.data.filters, 'sectors')
 
@@ -37,7 +19,7 @@ module.exports = router => {
 
     // the user has selected a status filter
     if(hasFilters) {
-      applications = applications.filter(application => {
+      comments = documents.filter(application => {
         let matchesStatus = true
         let matchesSector = true
 
@@ -78,46 +60,45 @@ module.exports = router => {
     }
 
     let pageSize = 25
-    let pagination = new Pagination(applications, req.query.page, pageSize)
-    applications = pagination.getData()
+    let pagination = new Pagination(comments, req.query.page, pageSize)
+    // documents = pagination.getData()
 
-    res.render('applications/index', {
-      applications,
+    res.render('applications/comments/index', {
+      application,
+      comments,
       selectedFilters,
       pagination
     })
   })
 
-  router.get('/applications/clear-search', (req, res) => {
-    _.set(req, 'session.data.search.keyWords', '')
+  router.get('/applications/:applicationId/comments/clear-search', (req, res) => {
+    _.set(req, 'session.data.search.emailAddress', '')
     res.redirect('/applications')
   })
 
-  router.get('/applications/remove-status/:status', (req, res) => {
+  router.get('/applications/:applicationId/comments/remove-status/:status', (req, res) => {
     _.set(req, 'session.data.filters.statuses', _.pull(req.session.data.filters.statuses, req.params.status))
     res.redirect('/applications')
   })
 
-  router.get('/applications/remove-sector/:sector', (req, res) => {
+  router.get('/applications/:applicationId/comments/remove-sector/:sector', (req, res) => {
     _.set(req, 'session.data.filters.sectors', _.pull(req.session.data.filters.sectors, req.params.sector))
     res.redirect('/applications')
   })
 
-  router.get('/applications/clear-filters', (req, res) => {
+  router.get('/applications/:applicationId/comments/clear-filters', (req, res) => {
     _.set(req, 'session.data.filters.statuses', null)
     _.set(req, 'session.data.filters.sectors', null)
     res.redirect('/applications')
   })
 
-  router.get('/applications/:applicationId', (req, res) => {
+  router.get('/applications/:applicationId/comments/:documentId', (req, res) => {
     let application = req.session.data.applications.find(application => application.id === req.params.applicationId)
 
     res.render('applications/show', {
       application
     })
   })
-
-
 
 
 }

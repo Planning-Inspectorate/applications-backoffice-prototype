@@ -1,9 +1,8 @@
 {% extends "layouts/main.html" %}
 
-{% set heading = 'Documents (' + pagination.totalCount + ')' %}
-{% set pageName = heading + ' - ' + application.name %}
+{% set pageName = 'Relevant representations - ' + application.name %}
 {% set primaryNavId = 'applications' %}
-{% set secondaryNavId = 'documentation' %}
+{% set secondaryNavId = 'comments' %}
 
 {% block header %}
   {{super()}}
@@ -20,12 +19,12 @@
 
   {{appPageHeader({
     heading: {
-      text: heading,
+      text: 'Relevant representations',
       classes: 'govuk-heading-l'
     },
     items: [{
-      text: 'Upload document',
-      href: '/applications/' + application.id + '/documents/new'
+      text: 'Create relevant representation',
+      href: '/applications/' + application.id + '/comments/new'
     }]
   })}}
 
@@ -39,6 +38,7 @@
 
       <div class="app-action-bar">
         <div class="app-action-bar__filter"></div>
+
         {{appButtonMenu({
           items: [{
             text: 'Mark as not checked',
@@ -53,12 +53,12 @@
             text: 'Mark as do not publish',
             classes: 'govuk-button--secondary'
           }]
-        }) if documents.length > 0}}
+        }) if comments.length > 0}}
       </div>
 
-      {% if documents.length %}
+      {% if comments.length %}
         <div class="app-list app-list--checkboxes">
-          {% for document in documents %}
+          {% for item in comments %}
             <div class="app-list__item">
 
               <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
@@ -71,17 +71,15 @@
               </div>
 
               <div class="app-list__contents">
-
-
                 <h2 class="govuk-heading-m">
-                  <a href="/applications/{{application.id}}/documents/{{document.id}}">
-                    {{document.name}}
+                  <a href="/applications/{{application.id}}">
+                    {{item.name}}
                   </a>
                 </h2>
 
                 {{ govukTag({
-                  text: document.status,
-                  classes: document.status | documentStatusColour
+                  text: item.status,
+                  classes: item.status | documentStatusColour
                 }) }}
 
                 {{ govukSummaryList({

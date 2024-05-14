@@ -1,13 +1,13 @@
 <div class="app-search-form">
   <form>
     {{ govukInput({
-      id: "search[emailAddress]",
-      name: "search[emailAddress]",
+      id: "search[keyWords]",
+      name: "search[keyWords]",
       label: {
         text: "Search by project reference number, name or keyword",
         classes: "govuk-label--s app-search-form__label"
       },
-      value: data.search.emailAddress
+      value: data.search.keyWords
     }) }}
 
     {{ govukButton({
@@ -16,7 +16,7 @@
     }) }}
   </form>
 
-  {% if data.search.emailAddress %}
+  {% if data.search.keyWords %}
     <p class="govuk-!-margin-top-2 govuk-!-margin-bottom-0"><a class="govuk-link--no-visited-state" href="/applications/clear-search">Clear search</a></p>
   {% endif %}
 </div>

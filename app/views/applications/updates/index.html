@@ -56,6 +56,14 @@
               rows: [
                 {
                   key: {
+                    text: "Date published"
+                  },
+                  value: {
+                    text: update.publishDate | govukDate + ' ' + update.publishDate | govukTime
+                  }
+                } if update.publishDate,
+                {
+                  key: {
                     text: "Notify subscribers"
                   },
                   value: {

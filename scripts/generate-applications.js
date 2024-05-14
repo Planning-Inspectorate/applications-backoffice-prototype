@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const faker =  require('@faker-js/faker').faker
-
+const { v4: uuidv4 } = require('uuid')
 
 const generateApplication = () => {
   let application = {}
@@ -79,7 +79,6 @@ const generateApplication = () => {
     town: 'London',
     postcode: 'W9 1ST'
   }
-
   application.applicant.website = faker.internet.url()
 
   // Documents
@@ -88,6 +87,7 @@ const generateApplication = () => {
     for(var i = 0; i < faker.number.int({ min: 1, max: 20 }); i++) {
       application.documents.push(
         {
+          id: uuidv4(),
           status: faker.helpers.arrayElement(['Published', 'Ready to publish', 'Checked', 'Not checked', 'Do not publish']),
           receivedDate: application.sentDate = faker.date.recent(),
           name: faker.system.commonFileName(),
@@ -95,6 +95,34 @@ const generateApplication = () => {
           description: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n')
         }
       )
+    }
+  }
+
+  application.advice = []
+  if(faker.helpers.arrayElement(['Yes', 'No']) == 'Yes') {
+    for(var i = 0; i < faker.number.int({ min: 1, max: 20 }); i++) {
+
+      let advice = {
+        id: uuidv4(),
+        name: faker.lorem.words(4),
+        status: faker.helpers.arrayElement(['Published', 'Ready to publish', 'Checked', 'Not checked', 'Do not publish']),
+        request: {
+          enquiryDate: application.sentDate = faker.date.recent(),
+          firstName:faker.person.firstName(),
+          lastName: faker.person.lastName(),
+          organisationName: faker.company.name(),
+          method: faker.helpers.arrayElement(['Phone', 'Email', 'Meeting', 'Post']),
+          details: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n')
+        },
+        response: {
+          enquiryDate: application.sentDate = faker.date.recent(),
+          firstName:faker.person.firstName(),
+          lastName: faker.person.lastName(),
+          details: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n')
+        }
+      }
+
+      application.advice.push(advice)
     }
   }
 

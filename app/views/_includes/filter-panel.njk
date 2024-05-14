@@ -1,12 +1,32 @@
 {% set filterOptionsHtml %}
 
   {{ govukCheckboxes({
+    idPrefix: "filters[published]",
+    name: "filters[published]",
+    classes: "govuk-checkboxes--small",
+    fieldset: {
+      legend: {
+        text: "Published",
+        classes: "govuk-fieldset__legend--s"
+      }
+    },
+    items: [{
+      value: 'Published',
+      text: 'Published'
+    }, {
+      value: 'Not published',
+      text: 'Not published'
+    }],
+    values: data.filters.statuses
+  }) }}
+
+  {{ govukCheckboxes({
     idPrefix: "filters[statuses]",
     name: "filters[statuses]",
     classes: "govuk-checkboxes--small",
     fieldset: {
       legend: {
-        text: "Status",
+        text: "Stage",
         classes: "govuk-fieldset__legend--s"
       }
     },

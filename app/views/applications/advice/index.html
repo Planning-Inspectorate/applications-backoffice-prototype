@@ -1,9 +1,9 @@
 {% extends "layouts/main.html" %}
 
-{% set heading = 'Documents (' + pagination.totalCount + ')' %}
+{% set heading = 'S51 advice (' + pagination.totalCount + ')' %}
 {% set pageName = heading + ' - ' + application.name %}
 {% set primaryNavId = 'applications' %}
-{% set secondaryNavId = 'documentation' %}
+{% set secondaryNavId = 'advice' %}
 
 {% block header %}
   {{super()}}
@@ -24,8 +24,8 @@
       classes: 'govuk-heading-l'
     },
     items: [{
-      text: 'Upload document',
-      href: '/applications/' + application.id + '/documents/new'
+      text: 'Create S51 advice',
+      href: '/applications/' + application.id + '/advice/new'
     }]
   })}}
 
@@ -39,6 +39,7 @@
 
       <div class="app-action-bar">
         <div class="app-action-bar__filter"></div>
+
         {{appButtonMenu({
           items: [{
             text: 'Mark as not checked',
@@ -53,12 +54,12 @@
             text: 'Mark as do not publish',
             classes: 'govuk-button--secondary'
           }]
-        }) if documents.length > 0}}
+        }) if advice.length > 0}}
       </div>
 
-      {% if documents.length %}
+      {% if advice.length %}
         <div class="app-list app-list--checkboxes">
-          {% for document in documents %}
+          {% for item in advice %}
             <div class="app-list__item">
 
               <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
@@ -71,17 +72,15 @@
               </div>
 
               <div class="app-list__contents">
-
-
                 <h2 class="govuk-heading-m">
-                  <a href="/applications/{{application.id}}/documents/{{document.id}}">
-                    {{document.name}}
+                  <a href="/applications/{{application.id}}/advice/{{item.id}}">
+                    {{item.name}}
                   </a>
                 </h2>
 
                 {{ govukTag({
-                  text: document.status,
-                  classes: document.status | documentStatusColour
+                  text: item.status,
+                  classes: item.status | documentStatusColour
                 }) }}
 
                 {{ govukSummaryList({
@@ -92,15 +91,7 @@
                         text: "Date received"
                       },
                       value: {
-                        text: document.receivedDate | govukDateTime
-                      }
-                    },
-                    {
-                      key: {
-                        text: "File size"
-                      },
-                      value: {
-                        text: document.size
+                        text: item.request.enquiryDate | govukDateTime
                       }
                     }
                   ]

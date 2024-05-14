@@ -1,13 +1,14 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = "Projects" %}
+{% set heading = 'Projects (' + pagination.totalCount + ')' %}
+{% set pageName = heading %}
 {% set primaryNavId = "applications" %}
 
 {% block content %}
 
   {{appPageHeader({
     heading: {
-      text: pageName,
+      text: heading,
       classes: 'govuk-heading-l'
     },
     items: [{
@@ -67,7 +68,7 @@
                       text: "Date created"
                     },
                     value: {
-                      text: application.sentDate | govukDate + ' at ' + application.sentDate | govukTime
+                      text: application.sentDate | govukDateTime
                     }
                   }
                 ]
