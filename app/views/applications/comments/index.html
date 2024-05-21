@@ -52,6 +52,9 @@
           }, {
             text: 'Mark as do not publish',
             classes: 'govuk-button--secondary'
+          }, {
+            text: 'Publish',
+            classes: 'govuk-button--secondary'
           }]
         }) if comments.length > 0}}
       </div>
@@ -73,7 +76,7 @@
               <div class="app-list__contents">
                 <h2 class="govuk-heading-m">
                   <a href="/applications/{{application.id}}">
-                    {{item.name}}
+                    {{item.firstName}} {{item.lastName}}
                   </a>
                 </h2>
 
@@ -87,18 +90,18 @@
                   rows: [
                     {
                       key: {
-                        text: "Date received"
+                        text: "Organisation"
                       },
                       value: {
-                        text: document.receivedDate | govukDateTime
+                        text: item.organisationName
                       }
                     },
                     {
                       key: {
-                        text: "File size"
+                        text: "Type"
                       },
                       value: {
-                        text: document.size
+                        text: 'Parish councils'
                       }
                     }
                   ]
@@ -143,7 +146,7 @@
     new AppFrontend.ButtonMenu({
       container: $(".app-button-menu").eq(3),
       mq: "(min-width: 1000em)",
-      buttonText: "Mark documents",
+      buttonText: "Actions",
       buttonClasses:
         "govuk-button--secondary app-button-menu__toggle-button--secondary",
       menuClasses: "app-button-menu__wrapper--righ",

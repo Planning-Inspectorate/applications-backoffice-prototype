@@ -126,6 +126,29 @@ const generateApplication = () => {
     }
   }
 
+  application.comments = []
+  if(faker.helpers.arrayElement(['Yes', 'No']) == 'Yes') {
+    for(var i = 0; i < faker.number.int({ min: 1, max: 20 }); i++) {
+
+      let comment = {
+        id: uuidv4(),
+        status: faker.helpers.arrayElement(['Published', 'Ready to publish', 'Checked', 'Not checked', 'Do not publish']),
+        firstName:faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        organisationName: faker.company.name(),
+        address: {
+          line1: '1 The Avenue',
+          town: 'London',
+          postcode: 'W9 1ST'
+        },
+        preferredContactMethod: faker.helpers.arrayElement(['Phone', 'Email']),
+        details: faker.lorem.paragraphs(faker.number.int({ min: 1, max: 3 }), '\n\n'),
+      }
+
+      application.comments.push(comment)
+    }
+  }
+
   // Updates
   application.updates = []
   if(faker.helpers.arrayElement(['Yes', 'No']) == 'Yes') {

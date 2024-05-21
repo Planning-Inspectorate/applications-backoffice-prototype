@@ -22,9 +22,18 @@
 
       <h1 class="govuk-heading-l">Timetable</h1>
 
-      {{ govukButton({
-        text: "Create timetable item"
-      }) }}
+      <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Create timetable item"
+        }) }}
+
+        {{ govukButton({
+          text: "Publish timetable"
+        }) }}
+      </div>
+
+
+
 
       <p>No timetable items.</p>
 

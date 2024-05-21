@@ -6,7 +6,7 @@ module.exports = router => {
   router.get('/applications/:applicationId/comments', (req, res) => {
     let application = req.session.data.applications.find(application => application.id === req.params.applicationId)
 
-    let comments = application.documents
+    let comments = application.comments
 
     let selectedStatusFilters = _.get(req.session.data.filters, 'statuses')
     let selectedSectorFilters = _.get(req.session.data.filters, 'sectors')

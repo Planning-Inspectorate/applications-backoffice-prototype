@@ -1,6 +1,10 @@
 {% extends "layouts/main.html" %}
 
-{% set heading = 'Documents (' + pagination.totalCount + ')' %}
+{% if application.documents.length == 0 %}
+  {% set heading = 'Documents' %}
+{% else %}
+  {% set heading = 'Documents (' + pagination.totalCount + ')' %}
+{% endif %}
 {% set pageName = heading + ' - ' + application.name %}
 {% set primaryNavId = 'applications' %}
 {% set secondaryNavId = 'documentation' %}
@@ -26,100 +30,110 @@
     items: [{
       text: 'Upload document',
       href: '/applications/' + application.id + '/documents/new'
-    }]
+    }] if application.documents.length > 0
   })}}
 
-  <div class="app-filter-layout">
-    <div class="app-filter-layout__filter">
-      {% include "_includes/document-filter-panel.njk" %}
-    </div>
-    <div class="app-filter-layout__content">
-
-      {% include "_includes/document-search-form.njk" %}
-
-      <div class="app-action-bar">
-        <div class="app-action-bar__filter"></div>
-        {{appButtonMenu({
-          items: [{
-            text: 'Mark as not checked',
-            classes: 'govuk-button--secondary'
-          }, {
-            text: 'Mark as checked',
-            classes: 'govuk-button--secondary'
-          }, {
-            text: 'Mark as ready to publish',
-            classes: 'govuk-button--secondary'
-          }, {
-            text: 'Mark as do not publish',
-            classes: 'govuk-button--secondary'
-          }]
-        }) if documents.length > 0}}
+  {% if application.documents.length > 0 %}
+    <div class="app-filter-layout">
+      <div class="app-filter-layout__filter">
+        {% include "_includes/document-filter-panel.njk" %}
       </div>
+      <div class="app-filter-layout__content">
 
-      {% if documents.length %}
-        <div class="app-list app-list--checkboxes">
-          {% for document in documents %}
-            <div class="app-list__item">
+        {% include "_includes/document-search-form.njk" %}
 
-              <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
-                <div class="govuk-checkboxes__item">
-                  <input class="govuk-checkboxes__input" id="organisation" name="organisation" type="checkbox" value="hmrc">
-                  <label class="govuk-label govuk-checkboxes__label" for="organisation">
-                    <span class="govuk-visually-hidden">Select</span>
-                  </label>
+        <div class="app-action-bar">
+          <div class="app-action-bar__filter"></div>
+          {{appButtonMenu({
+            items: [{
+              text: 'Mark as not checked',
+              classes: 'govuk-button--secondary'
+            }, {
+              text: 'Mark as checked',
+              classes: 'govuk-button--secondary'
+            }, {
+              text: 'Mark as ready to publish',
+              classes: 'govuk-button--secondary'
+            }, {
+              text: 'Mark as do not publish',
+              classes: 'govuk-button--secondary'
+            }]
+          }) if documents.length > 0}}
+        </div>
+
+        {% if documents.length %}
+          <div class="app-list app-list--checkboxes">
+            {% for document in documents %}
+              <div class="app-list__item">
+
+                <div class="govuk-checkboxes govuk-checkboxes--small" data-module="govuk-checkboxes">
+                  <div class="govuk-checkboxes__item">
+                    <input class="govuk-checkboxes__input" id="organisation" name="organisation" type="checkbox" value="hmrc">
+                    <label class="govuk-label govuk-checkboxes__label" for="organisation">
+                      <span class="govuk-visually-hidden">Select</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="app-list__contents">
+
+
+                  <h2 class="govuk-heading-m">
+                    <a href="/applications/{{application.id}}/documents/{{document.id}}">
+                      {{document.name}}
+                    </a>
+                  </h2>
+
+                  {{ govukTag({
+                    text: document.status,
+                    classes: document.status | documentStatusColour
+                  }) }}
+
+                  {{ govukSummaryList({
+                    classes: "govuk-summary-list--no-border",
+                    rows: [
+                      {
+                        key: {
+                          text: "Date received"
+                        },
+                        value: {
+                          text: document.receivedDate | govukDateTime
+                        }
+                      },
+                      {
+                        key: {
+                          text: "File size"
+                        },
+                        value: {
+                          text: document.size
+                        }
+                      }
+                    ]
+                  }) }}
                 </div>
               </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p>There are no results.</p>
+        {% endif %}
 
-              <div class="app-list__contents">
-
-
-                <h2 class="govuk-heading-m">
-                  <a href="/applications/{{application.id}}/documents/{{document.id}}">
-                    {{document.name}}
-                  </a>
-                </h2>
-
-                {{ govukTag({
-                  text: document.status,
-                  classes: document.status | documentStatusColour
-                }) }}
-
-                {{ govukSummaryList({
-                  classes: "govuk-summary-list--no-border",
-                  rows: [
-                    {
-                      key: {
-                        text: "Date received"
-                      },
-                      value: {
-                        text: document.receivedDate | govukDateTime
-                      }
-                    },
-                    {
-                      key: {
-                        text: "File size"
-                      },
-                      value: {
-                        text: document.size
-                      }
-                    }
-                  ]
-                }) }}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      {% else %}
-        <p>There are no results.</p>
-      {% endif %}
-
-      {% if pagination.pageItems > 1 %}
-        {% include "_includes/pagination.njk" %}
-      {% endif %}
+        {% if pagination.pageItems > 1 %}
+          {% include "_includes/pagination.njk" %}
+        {% endif %}
 
 
+      </div>
     </div>
-  </div>
+  {% else %}
+
+    <p>There are no documents.</p>
+
+    {{ govukButton({
+      text: "Upload document"
+    }) }}
+
+  {% endif %}
 {% endblock %}
 
 {% block scripts %}
