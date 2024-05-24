@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Overview - ' + application.name %}
+{% set primaryNavId = 'applications' %}
+{% set secondaryNavId = 'overview' %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "#"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    html: '<h2 class="govuk-heading-m">' + flash + '</h2>'
+  }) if flash.length }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Update relevant representation status</span>
+      {{ govukTextarea({
+        id: "blah",
+        name: "blah",
+        label: {
+          text: "Notes about the withdrawal (optional)",
+          isPageHeading: true,
+          classes: "govuk-label--l"
+        }
+      }) }}
+
+      {{ govukButton({
+        text: "Update status"
+      }) }}
+
+    </div>
+  </div>
+
+{% endblock %}
