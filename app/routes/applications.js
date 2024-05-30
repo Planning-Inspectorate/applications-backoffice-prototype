@@ -10,11 +10,11 @@ module.exports = router => {
 
     if(keyWords) {
       let applicationsByName = applications.filter(application => {
-        return application.name.indexOf(keyWords) > -1
+        return application.name.toLowerCase().indexOf(keyWords.toLowerCase()) > -1
       })
 
       let applicationsByReference = applications.filter(application => {
-        return application.id.indexOf(keyWords) > -1
+        return application.id.indexOf(keyWords.toLowerCase()) > -1
       })
 
       if(applicationsByName.length > 0) {
