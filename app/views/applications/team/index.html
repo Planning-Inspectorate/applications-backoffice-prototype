@@ -1,6 +1,7 @@
 {% extends "layouts/main.html" %}
 
-{% set pageName = 'Team - ' + application.name %}
+{% set heading = 'Team (2)' %}
+{% set pageName = heading + ' - ' + application.name %}
 {% set primaryNavId = 'applications' %}
 {% set secondaryNavId = 'team' %}
 
@@ -17,17 +18,19 @@
 
   {% include "_includes/secondary-navigation.njk" %}
 
+  {{appPageHeader({
+      heading: {
+        text: heading,
+        classes: 'govuk-heading-l'
+      },
+      items: [{
+        text: 'Add team member',
+        href: '/applications/' + application.id + '/team/new'
+      }]
+    })}}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-      <h1 class="govuk-heading-l">Team</h1>
-
-      <div class="govuk-button-group">
-        {{ govukButton({
-          text: "Add team member"
-        }) }}
-      </div>
-
       <div class="app-user-card">
         <h2 class="govuk-heading-s govuk-!-margin-bottom-0"><a class="govuk-link govuk-link--no-visited-state" href="#">Baylee Smith</a> <span class="govuk-!-font-weight-regular"></h2>
         <p class="govuk-!-margin-top-1 govuk-!-margin-bottom-0 govuk-!-font-size-16">baylee@example.com</p>
