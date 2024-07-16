@@ -1,0 +1,147 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Logistics' %}
+
+{% block beforeContent %}
+  {{ govukBreadcrumbs({
+    items: [
+      {
+        href: '#',
+        text: 'Gatwick Airport'
+      },
+      {
+        href: '#',
+        text: 'Documentation'
+      },
+      {
+        href: '#',
+        text: 'Project management'
+      },
+      {
+        text: 'Logistics'
+      }
+    ]
+  }) }}
+{% endblock %}
+
+{% macro appFolderIcon() %}
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+    <path d="
+      M9.64475,1.25 H1.25
+      V18.75 H24.75
+      V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+  </svg>
+{% endmacro %}
+
+
+{% block content %}
+  {{ govukNotificationBanner({
+    type: "success",
+    html: '<h2 class="govuk-heading-m">' + flash + '</h2>'
+  }) if flash.length }}
+
+  <div class="app-fat-header">
+    {# <span class="govuk-caption-xl">TR123456</span>
+    <span class="govuk-heading-xl govuk-!-margin-bottom-1">Gatwick Airport</span>
+    <p class="govuk-!-margin-bottom-4">Transport</p>
+    {{ govukTag({
+      text: "Pre-application",
+      classes: 'govuk-tag--green govuk-!-margin-bottom-0'
+    }) }} #}
+    <br><br><br><br><br>
+    <p class="govuk-!-margin-padding-bottom-0">Fat header goes here</p>
+    <br><br><br><br><br>
+  </div>
+
+
+  <div class="app-page-header">
+    <div class="app-page-header__title">
+      <h1 class="govuk-heading-l">
+        Welsh
+      </h1>
+    </div>
+    <div class="app-page-header__actions">
+      <a class="govuk-!-font-size-19 govuk-!-margin-right-2" href="#">Rename folder</a>
+      <a class="govuk-!-font-size-19" href="#">Delete folder</a>
+    </div>
+  </div>
+
+  <h2 class="govuk-heading-m">Folders (2)</h2>
+
+  <p class="govuk-!-margin-bottom-5"><a href="#">Create folder</a></p>
+
+  <ul class="govuk-list govuk-list--spaced app-folder-list">
+    <li>
+      <a href="#">{{appFolderIcon()}} Logistics</a> (3 files, 1 folder)
+    </li>
+    <li>
+      <a href="#">{{appFolderIcon()}} Mail merge</a> (0 files)
+    </li>
+    <li>
+      <a href="#">{{appFolderIcon()}} Team 2</a> (0 files, 2 folders)
+    </li>
+  </ul>
+
+  <h2 class="govuk-heading-m govuk-!-margin-top-6">Files (6)</h2>
+
+  <div class="govuk-button-group">
+    {{ govukButton({
+      text: "Upload files"
+    }) }}
+
+    {{ govukButton({
+      text: "View publishing queue",
+      classes: "govuk-button--secondary"
+    }) }}
+  </div>
+
+
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <div class="app-fat-header">
+        <br><br><br>
+        <p class="govuk-!-margin-bottom-0">Filters go here</p>
+        <br><br><br>
+      </div>
+    </div>
+    <div class="govuk-grid-column-one-third">
+      <div class="app-fat-header">
+        <br><br><br>
+        <p class="govuk-!-margin-bottom-0">Actions go here</p>
+        <br><br><br>
+      </div>
+    </div>
+  </div>
+
+ <div class="app-fat-header">
+  <br><br><br><br><br><br><br><br><br>
+  <p class="govuk-!-margin-bottom-0">Table goes here</p>
+  <br><br><br><br><br><br><br><br><br>
+</div>
+
+{{ govukPagination({
+  classes: 'govuk-!-margin-top-4 govuk-!-margin-bottom-2',
+  next: {
+    href: "#"
+  },
+  items: [
+    {
+      number: 1,
+      current: true,
+      href: "#"
+    },
+    {
+      number: 2,
+      href: "#"
+    },
+    {
+      number: 3,
+      href: "#"
+    }
+  ]
+}) }}
+
+<p class="govuk-!-margin-bottom-0">Showing 1 to 25 of 80 results</p>
+
+{% endblock %}

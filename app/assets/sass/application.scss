@@ -17,6 +17,37 @@ $app-images-path: "/public/images/";
 @import "components/button-menu.scss";
 @import "components/identity-bar.scss";
 
+.app-fat-header {
+  background: govuk-colour('light-grey');
+  padding: govuk-spacing(3) govuk-spacing(4);
+  margin-bottom: govuk-spacing(5);
+}
+
+.svg-folder-icon > path {
+  fill: #dee0e2;
+}
+
+@media (forced-colors: active) {
+  .svg-folder-icon > path {
+    fill: none;
+  }
+}
+
+.app-folder-list {
+  li {
+
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    a {
+      margin-right: 5px;
+    }
+  }
+}
+
 h1 .govuk-tag {
   vertical-align: middle;
 }
