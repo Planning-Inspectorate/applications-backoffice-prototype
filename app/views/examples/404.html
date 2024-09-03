@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Page not found' %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">{{pageName}}</h1>
+
+      <p>If you typed the web address, check it’s correct.</p>
+
+      <p>If you pasted the web address, check you copied the entire address.</p>
+
+      <p>If the web address is correct or you selected a link or button, you can contact us by:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>
+          <a href="https://contact-us.planninginspectorate.gov.uk/hc/en-gb/requests/new">completing our online contact form</a>
+        </li>
+        <li>
+          calling our helpline
+        </li>
+      </ul>
+      <p class="govuk-body">
+        Phone:<br>
+        0303 444 5000
+      </p>
+
+      <p>Open Monday to Friday: 9am to 4pm.<br>
+      Closed on weekends and bank holidays.</p>
+
+    </div>
+  </div>
+
+{% endblock %}
