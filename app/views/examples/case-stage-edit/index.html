@@ -1,0 +1,71 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "#"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Update stage</span>
+
+      <form action="/examples/case-stage-edit/send-update">
+
+        {{ govukRadios({
+          name: "blah",
+          fieldset: {
+            legend: {
+              text: "Stage",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "Pre-application",
+              text: "Pre-application"
+            },
+            {
+              value: "Acceptance",
+              text: "Acceptance"
+            },
+            {
+              value: "Pre-examination",
+              text: "Pre-examination"
+            },
+            {
+              value: "Examination",
+              text: "Examination"
+            },
+            {
+              value: "Recommendation",
+              text: "Recommendation"
+            },
+            {
+              value: "Decision",
+              text: "Decision"
+            },
+            {
+              value: "Post-decision",
+              text: "Post-decision"
+            },
+            {
+              value: "Withdrawn",
+              text: "Withdrawn"
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

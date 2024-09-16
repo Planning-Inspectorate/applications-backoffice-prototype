@@ -1,5 +1,7 @@
 const applications = require('./applications.json')
 
 module.exports = {
-  applications
+  applications,
+  currentStage: 'Pre-application',
+  repStatus: 'preOpen'
 }

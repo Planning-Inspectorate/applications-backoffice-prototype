@@ -20,6 +20,10 @@ router.get('/clear-all-data', (req, res) => {
   }
 })
 
+router.get('/set-stage', (req, res) => {
+  res.redirect('/examples/project-information')
+})
+
 require('./routes/account')(router)
 require('./routes/applications')(router)
 require('./routes/application--approve')(router)

@@ -1,0 +1,90 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Update stage</span>
+      <hl class="govuk-heading-l">Details about the project update</hl>
+
+      <p>The following update will be published:</p>
+
+      {{ govukInsetText({
+        text: "Eu Lorem nisi fugiat amet dolore proident culpa labore aliquip dolore ex. Ut dolor laborum excepteur veniam tempor elit in mollit labore. Commodo laborum consectetur veniam. Elit tempor laboris elit pariatur commodo ex duis tempor nisi aliquip officia dolor. Ad do velit amet ea exercitation Lorem officia consectetur voluptate ea incididunt nulla eiusmod. Cillum aute consequat quis incididunt."
+      }) }}
+
+
+      <form>
+
+        {# {{ govukRadios({
+          name: "blah",
+          fieldset: {
+            legend: {
+              text: "Do you want to send a project update now?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.blah,
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No, I’ll send one separately",
+              text: "No, I’ll send one separately"
+            }
+          ]
+        }) }} #}
+
+        {{ govukRadios({
+          name: "blah",
+          fieldset: {
+            legend: {
+              text: "Do you want to publish this update?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          value: data.blah,
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No, I need to make a change",
+              text: "No, I need to make a change"
+            }
+          ]
+        }) }}
+
+
+      {{ govukCharacterCount({
+        name: "blah",
+        id: "blah",
+        label: {
+          text: "Project update details",
+          isPageHeading: true,
+          classes: "govuk-label--l"
+        },
+        maxlength: 600,
+        value: "unt ipsum dolor qui deserunt id ipsum. Duis dolore laborum in excepteur veniam adipisicing est deserunt mollit elit nostrud non laboris. Culpa veniam aliquip aliqua do qui. Ad exercitation amet culpa minim sunt voluptate reprehenderit incididunt in amet id enim. Quis irure non commodo laboris et."
+      }) if 1 == 2 }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

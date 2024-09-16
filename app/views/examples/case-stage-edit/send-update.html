@@ -1,0 +1,68 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Update stage</span>
+      {# <h1 class="govuk-heading-l">Project update</h1>
+
+      <p>The following project update will be published</p>
+
+      {{ govukInsetText({
+        html: "Sunt ipsum dolor qui deserunt id ipsum. Duis dolore laborum in excepteur veniam adipisicing est deserunt mollit elit nostrud non laboris. Culpa veniam aliquip aliqua do qui. Ad exercitation amet culpa minim sunt voluptate reprehenderit incididunt in amet id enim. Quis irure non commodo laboris et."
+      }) }} #}
+
+      <form action="/examples/case-stage-edit/update-details">
+
+        {{ govukRadios({
+          name: "blah",
+          fieldset: {
+            legend: {
+              text: "Do you want to publish a project update?",
+              isPageHeading: false,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.blah,
+          items: [
+            {
+              value: "Yes",
+              text: "Yes"
+            },
+            {
+              value: "No",
+              text: "No"
+            }
+          ]
+        }) }}
+
+      {# {{ govukCharacterCount({
+        name: "blah",
+        id: "blah",
+        label: {
+          text: "Project update details",
+          isPageHeading: true,
+          classes: "govuk-label--l"
+        },
+        maxlength: 200,
+        value: "Some default update.\n\nFurther details about the default update."
+      }) }} #}
+
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

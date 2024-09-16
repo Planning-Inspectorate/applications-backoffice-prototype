@@ -37,3 +37,14 @@ addFilter('documentStatusColour', status => {
       return 'govuk-tag--red'
   }
 })
+
+addFilter('stageClass', status => {
+  switch(status) {
+    case 'Completed':
+      return 'govuk-tag--green'
+    case 'In progress':
+      return 'govuk-tag--yellow'
+    case 'Not started':
+      return 'govuk-tag--grey'
+  }
+})

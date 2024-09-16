@@ -1,0 +1,283 @@
+{% extends "layouts/main.html" %}
+{% set pageName = 'Project information' %}
+
+{% set currentStage = data.currentStage or 'Decision' %}
+{# Pre-application, Application received, Application published, Examination, Recommendation, Decision, Post-decision#}
+
+{% set preApplicationStatus = 'In progress' %}
+{% set applicationReceivedStatus = 'Not started' %}
+{% set applicationPublishedStatus = 'Not started' %}
+{% set examinationStatus = 'Not started' %}
+{% set recommendationStatus = 'Not started' %}
+{% set decisionStatus = 'Not started' %}
+{% set postDecisionStatus = 'Not started' %}
+
+{% if currentStage == 'Application received' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Application published' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Examination' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'Completed' %}
+  {% set examinationStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Examination' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'Completed' %}
+  {% set examinationStatus = 'Completed' %}
+  {% set recommendationStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Recommendation' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'Completed' %}
+  {% set examinationStatus = 'Completed' %}
+  {% set recommendationStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Decision' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'Completed' %}
+  {% set examinationStatus = 'Completed' %}
+  {% set recommendationStatus = 'Completed' %}
+  {% set decisionStatus = 'In progress' %}
+{% endif %}
+
+{% if currentStage == 'Post-decision' %}
+  {% set preApplicationStatus = 'Completed' %}
+  {% set applicationReceivedStatus = 'Completed' %}
+  {% set applicationPublishedStatus = 'Completed' %}
+  {% set examinationStatus = 'Completed' %}
+  {% set recommendationStatus = 'Completed' %}
+  {% set decisionStatus = 'Completed' %}
+  {% set postDecisionStatus = 'In progress' %}
+{% endif %}
+
+
+{% set repStatus = data.repStatus or 'preOpen' %} {# preOpen, open, closed, published, rule6Published #}
+{% set contactEmailAddress = 'contact@email.com' %}
+{% set dateOfRelevantRepresentationClose = '21 September 2025' %}
+{% set dateOfPreliminaryMeeting = '21 October 2025' %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-xl">Some material change application</span>
+      <h1 class="govuk-heading-xl">{{pageName}}</h1>
+
+      <h2 class="govuk-heading-m">Project stage</h2>
+      <p>The project is at the <b>{{currentStage | lower}}</b> stage.</p>
+
+      {% if preApplicationStatus == 'In progress' %} {# Pre-application #}
+        <p>The application is expected to be submitted.</p>
+        <p>When we receive the application, we will prepare to publish it.</p>
+      {% elseif applicationReceivedStatus == 'In progress' %} {# Application received #}
+        <p>There is no opportunity to make comments on the application at this stage.</p>
+      {% elseif applicationPublishedStatus == 'In progress' %} {# Application published #}
+        {% if repStatus == 'preOpen' %}
+          <p>At this stage you can <a href="#">register to have your say</a> about the proposed changes to the Development Consent Order. This page will be updated when the registration period opens.</p>
+          <p>You can view the project application documents to find out more about the application. </p>
+          <p><a href="#">Find out more about registering to have your say</a>.</p>
+        {% elseif repStatus == 'closed' %}
+          <p>The registration period to have your say about this project has closed.</p>
+          <p>The Secretary of State will now consider whether the application needs to be examined.</p>
+          <p>Contact the project case team to find out more about how to get involved if you are not registered.</p>
+          <p>You may have recently gained an interest in land affected by a development. If the developer did not tell you the application had been made or you did not register to have your say, you can still request to be an interested party.</p>
+          <p>You need to contact the project team. They will ask the Examining Body if you can be an interested party and have your say.</p>
+          {% if contactEmailAddress %}
+            <p>Email <a href="">{{contactEmailAddress}}</a> with your request to become an interested party.</p>
+          {% endif %}
+        {% elseif repStatus == 'open' %}
+          <p>If you want to comment on the proposed changes to the Development Consent Order, you can now register to have your say.</p>
+          {% if dateOfRelevantRepresentationClose %}
+            <p>Registration closes on {{dateOfRelevantRepresentationClose}}.</p>
+          {% endif %}
+          {{ govukButton({
+            text: "Register to have your say"
+          }) }}
+        {% elseif repStatus == 'published' %}
+          <p>We have now published all registration comments.</p>
+          <p>You can <a href="#">view comments from other people who registered</a>.</p>
+          <p>You may have recently gained an interest in land affected by a development. If the developer did not tell you the application had been made or you did not register to have your say you can still request to be an interested party.</p>
+
+          {% if contactEmailAddress %}
+            <p>You need to contact the project team. They will ask the Examining Body if you can be an interested party and have your say.</p>
+            <p>Email <a href="">{{contactEmailAddress}}</a> with your request to become an interested party.</p>
+          {% endif %}
+        {% elseif repStatus == 'rule6Published' %}
+          {% if dateOfPreliminaryMeeting %}
+            <p>The preliminary meeting for this project is on {{dateOfPreliminaryMeeting}}
+          {% endif %}
+          {% if rule6DocumentPath %}
+            <p>You can check the regulations 27 and 28 letter to find out how to get involved.
+          {% endif %}
+          <p>In this meeting, the Examining Body sets out how they intend to examine the application. This includes the examination timetable and the issues they will focus on during the examination.</p>
+
+          <p><a href="#">Find out more about getting involved in the preliminary meeting</a>.</p>
+
+          <p>You may have recently gained an interest in land affected by a development. If the developer did not tell you the application had been made or you did not register to have your say you can still request to be an interested party.</p>
+
+          <p>You need to contact the project team. They will ask the Examining Body if you can be an interested party and have your say.</p>
+
+          {% if contactEmailAddress %}
+            <p>Email <a href="">{{contactEmailAddress}}</a> with your request to become an interested party.</p>
+          {% endif %}
+        {% endif %}
+      {% elseif examinationStatus == 'In progress' %} {# Examination #}
+        <p>During the examination stage, anyone who has registered to have their say can submit comments at the deadlines set out in the examination timetable. You may also attend hearings, if hearings are held.</p>
+        {% if rule6DocumentPath %}
+          <p>You can also view the regulation 30 letter to find out more about what you can do during the examination stage.</p>
+        {% endif %}
+        <p>Find out more about the examination of the application stage.</p>
+        <p>You may have recently gained an interest in land affected by a development. If the developer did not tell you the application had been made or you did not register to have your say you can still request to be an interested party.</p>
+        <p>You need to contact the project team. They will ask the Examining Body if you can be an interested party and have your say.</p>
+        {% if contactEmailAddress %}
+          <p>Email <a href="">{{contactEmailAddress}}</a> with your request to become an interested party.</p>
+        {% endif %}
+      {% elseif recommendationStatus == 'In progress' %} {# Recommendation #}
+      {% elseif decisionStatus == 'In progress' %} {# Decision #}
+      {% elseif postDecisionStatus == 'In progress' %} {# Post-decision #}
+      {% elseif status8 == 'In progress' %} {# Withdrawn #}
+      {% endif %}
+
+      <dl class="govuk-summary-list govuk-!-margin-top-3">
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if preApplicationStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Pre-application</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The applicant plans their application to make a change to the Development Consent Order (DCO).</p>
+                <p>They carry out consultations and publicise the proposed application. This includes gathering information about how the changes to the project could affect the local environment.</p>
+                <p>It is important to get involved at this stage to influence the application before the applicant sends it to the Planning Inspectorate.</p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: preApplicationStatus, classes: preApplicationStatus | stageClass }) }} </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if applicationReceivedStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Application received</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The Planning Inspectorate publishes the application when they receive it. </p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: applicationReceivedStatus, classes: applicationReceivedStatus | stageClass }) }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if applicationPublishedStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Application published</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The applicant notifies anyone who has been consulted and publicises the fact that they have made an application. This must include how and when parties can register to get involved. The time period for registering is set by the applicant but must be no less than 28 days.</p>
+
+                <p>Anyone who wants to have their say needs to register at this stage.</p>
+
+                <p>After the registration period has closed, the Secretary of State will review the application. They will decide whether the application needs to be examined in detail.</p>
+
+                <p>If the Secretary of State believes an examination is not required, they’ll ask for more information before they make a decision.</p>
+
+                <p>If an examination is required, they’ll appoint an Examining Body to carry this out.</p>
+
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: applicationPublishedStatus, classes: applicationPublishedStatus | stageClass }) }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if examinationStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Examination</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The Examining Body asks questions about the proposed development. The applicant and anyone who has registered to have their say can get involved and submit comments at each deadline in the timetable. You can also attend hearings that may take place. This stage takes up to 4 months. </p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: examinationStatus, classes: examinationStatus | stageClass }) }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if recommendationStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Recommendation</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The Examining Body writes its recommendation report. This must be completed and sent to the relevant Secretary of State within 2 months of the end of examination stage.</p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: recommendationStatus, classes: recommendationStatus | stageClass }) }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if decisionStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Decision</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>The relevant Secretary of State makes the final decision.</p>
+                <p>They’ll consider the relevant representations received.</p>
+                <p>If an examination was required, the decision will be based on the recommendation report.</p>
+                <p>The Secretary of State has 2 months to make a decision.</p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: decisionStatus, classes: decisionStatus | stageClass }) }}</dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if postDecisionStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">What happens after the decision is made</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>Once the Secretary of State has made a decision, challenges can be made to the High Court. All procedures must be followed when making a challenge. The High Court will decide if there are grounds for a judicial review. </p>
+                <p>This must happen within 6 weeks. </p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"></dd>
+        </div>
+        <div class="govuk-summary-list__row" style="border-bottom:none; display: none;">
+          <dd class="govuk-summary-list__value">
+            <details class="govuk-details" data-module="govuk-details" {% if postDecisionStatus == 'In progress' %}open{% endif %}>
+              <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">Withdrawn</span>
+              </summary>
+              <div class="govuk-details__text">
+                <p>Once the Secretary of State has made a decision, there is a 6-week period where people can challenge the decision in the high court. This is called a judicial review.</p>
+                <p>
+                  <a href="#">What you can do after the decision has been made</a>
+                </p>
+              </div>
+            </details>
+          </dd>
+          <dd class="govuk-summary-list__actions"> {{ govukTag({ text: decisionStatus, classes: decisionStatus | stageClass }) }}</dd>
+        </div>
+      </dl>
+
+    </div>
+  </div>
+{% endblock %}
