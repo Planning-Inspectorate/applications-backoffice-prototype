@@ -1,0 +1,192 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = 'Pre-application dates' %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Manage key dates</span>
+      <h1 class="govuk-heading-l">{{pageName}}</h1>
+
+      <form>
+
+        {{ govukDateInput({
+          id: "date",
+          fieldset: {
+            legend: {
+              text: "Date the applicant notified the Planning Inspectorate about the project ",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "For example, 21 06 2025"
+          },
+          items: [
+            {
+              name: "date",
+              label: "Day",
+              value: data.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Month",
+              value: data.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Year",
+              value: data.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukDateInput({
+          id: "date2",
+          fieldset: {
+            legend: {
+              text: "Date project published on the website",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "For example, 21 06 2025"
+          },
+          items: [
+            {
+              name: "date",
+              label: "Day",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Month",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Year",
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukInput({
+          id: "date2",
+          name: "date2",
+          label: {
+            text: "Anticipated submission date published",
+            classes: "govuk-label--s"
+          },
+          classes: 'govuk-input--width-20',
+          hint: {
+            text: "Date the Planning Inspectorate expects the application to be submitted. For example, ‘between April and June 2024' or 'in September 2025’"
+          }
+        }) }}
+
+        {{ govukDateInput({
+          id: "date2",
+          fieldset: {
+            legend: {
+              text: "Anticipated submission date internal",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Date the Planning Inspectorate expects the application to be submitted."
+          },
+          items: [
+            {
+              name: "date",
+              label: "Day",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Month",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Year",
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukDateInput({
+          id: "date3",
+          fieldset: {
+            legend: {
+              text: "Screening opinion issued",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Date the Planning Inspectorate issues our screening opinion."
+          },
+          items: [
+            {
+              name: "date",
+              label: "Day",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Month",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Year",
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukDateInput({
+          id: "date5",
+          fieldset: {
+            legend: {
+              text: "Section 46 notification",
+              classes: "govuk-fieldset__legend--s"
+            }
+          },
+          hint: {
+            text: "Date Applicant notifies the Planning Inspectorate of statutory consultation."
+          },
+          items: [
+            {
+              name: "date",
+              label: "Day",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Month",
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "date",
+              label: "Year",
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+
+        {{ govukButton({
+          text: "Save and return"
+        }) }}
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
