@@ -67,6 +67,7 @@
 
 
 {% set repStatus = data.repStatus or 'preOpen' %} {# preOpen, open, closed, published, rule6Published #}
+{% set rule6DocumentPath = data.rule6DocumentPath or 'true' %}
 {% set contactEmailAddress = 'contact@email.com' %}
 {% set dateOfRelevantRepresentationClose = '21 September 2025' %}
 {% set dateOfPreliminaryMeeting = '21 October 2025' %}
@@ -120,7 +121,7 @@
           {% if dateOfPreliminaryMeeting %}
             <p>The preliminary meeting for this project is on {{dateOfPreliminaryMeeting}}
           {% endif %}
-          {% if rule6DocumentPath %}
+          {% if rule6DocumentPath == 'true' %}
             <p>You can check the regulations 27 and 28 letter to find out how to get involved.
           {% endif %}
           <p>In this meeting, the Examining Body sets out how they intend to examine the application. This includes the examination timetable and the issues they will focus on during the examination.</p>
@@ -137,7 +138,7 @@
         {% endif %}
       {% elseif examinationStatus == 'In progress' %} {# Examination #}
         <p>During the examination stage, anyone who has registered to have their say can submit comments at the deadlines set out in the examination timetable. You may also attend hearings, if hearings are held.</p>
-        {% if rule6DocumentPath %}
+        {% if rule6DocumentPath == 'true' %}
           <p>You can also view the regulation 30 letter to find out more about what you can do during the examination stage.</p>
         {% endif %}
         <p>Find out more about the examination of the application stage.</p>
