@@ -1,0 +1,178 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Create project update - Gatwick Airport</span>
+
+      {% if data.status == 'Draft' %}
+        <h1 class="govuk-heading-l">Check answers and save project update</h1>
+      {% else %}
+        {% if data.schedule == 'Now'  %}
+          <h1 class="govuk-heading-l">Check answers and publish project update</h1>
+        {% else %}
+          <h1 class="govuk-heading-l">Check answers and schedule project update</h1>
+        {% endif %}
+
+      {% endif %}
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Details about the update"
+            },
+            value: {
+              text: "Contents of the update etc"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/index",
+                  text: "Change",
+                  visuallyHiddenText: "Details about the update"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Email to subscribers?"
+            },
+            value: {
+              text: "Yes"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/index",
+                  text: "Change",
+                  visuallyHiddenText: "if you want to notify subscribers"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "What information does the update contain?"
+            },
+            value: {
+              text: "General"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/type",
+                  text: "Change",
+                  visuallyHiddenText: "Type"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Do you want to publish the update now or later?"
+            },
+            value: {
+              text: data.schedule
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/schedule",
+                  text: "Change",
+                  visuallyHiddenText: "if you want to publish the update now or later"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Schedule date"
+            },
+            value: {
+              text: "19 January 2025"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/time",
+                  text: "Change",
+                  visuallyHiddenText: "schedule date"
+                }
+              ]
+            }
+          } if data.schedule == 'Later',
+          {
+            key: {
+              text: "Schedule time"
+            },
+            value: {
+              text: "2:30pm"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/time",
+                  text: "Change",
+                  visuallyHiddenText: "schedule time"
+                }
+              ]
+            }
+          } if data.schedule == 'Later',
+          {
+            key: {
+              text: "Status"
+            },
+            value: {
+              text: data.status
+            },
+            actions: {
+              items: [
+                {
+                  href: "/examples/create-project-update/status",
+                  text: "Change",
+                  visuallyHiddenText: "Status"
+                }
+              ]
+            }
+          } if data.schedule == 'Now'
+        ]
+      }) }}
+
+
+      <h2 class="govuk-heading-m">Preview</h2>
+
+      {{ govukInsetText({
+        text: "Contents of the update etc"
+      }) }}
+
+      <form action="/examples/create-project-update/check">
+        {% if data.status == 'Draft' %}
+          {{ govukButton({
+            text: "Save project update"
+          }) }}
+        {% else %}
+          {% if data.schedule == 'Now'  %}
+            {{ govukButton({
+              text: "Publish project update"
+            }) }}
+          {% else %}
+            {{ govukButton({
+              text: "Schedule project update"
+            }) }}
+          {% endif %}
+        {% endif %}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

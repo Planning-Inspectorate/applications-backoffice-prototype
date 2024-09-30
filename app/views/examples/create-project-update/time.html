@@ -1,0 +1,73 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Create project update - Gatwick Airport</span>
+      <h1 class="govuk-heading-l">Schedule date and time</h1>
+
+      <form action="/examples/create-project-update/check">
+
+        {{ govukDateInput({
+          id: "blah6",
+          fieldset: {
+            legend: {
+              text: "Schedule date",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 2025"
+          },
+          items: [
+            {
+              name: "blah6",
+              label: "Day",
+              value: data.day,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "blah6",
+              label: "Month",
+              value: data.month,
+              classes: "govuk-input--width-2"
+            },
+            {
+              name: "blah6",
+              label: "Year",
+              value: data.year,
+              classes: "govuk-input--width-4"
+            }
+          ]
+        }) }}
+
+        {{ govukInput({
+          id: "blah7",
+          name: "blah7",
+          label: {
+            text: "Schedule time",
+            classes: "govuk-label--m"
+          },
+          classes: "govuk-input--width-5",
+          hint: {
+            text: "For example, 9am or 2:30pm - enter 12pm for midday"
+          },
+          value: data.blah7
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

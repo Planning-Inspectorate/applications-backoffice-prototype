@@ -1,0 +1,55 @@
+{% extends "layouts/main.html" %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <span class="govuk-caption-l">Create project update - Gatwick Airport</span>
+
+      <form action="/examples/create-project-update/schedule">
+
+        {{ govukRadios({
+          name: "blah3",
+          fieldset: {
+            legend: {
+              text: "What information does the update contain?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          value: data.blah3,
+          items: [
+            {
+              value: "General",
+              text: "General"
+            },
+            {
+              value: "The application has been submitted",
+              text: "The application has been submitted"
+            },
+            {
+              value: "Register to have your say has opened",
+              text: "Register to have your say has opened"
+            },
+            {
+              value: "The final decision has been issued",
+              text: "The final decision has been issued"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

@@ -37,3 +37,14 @@ require('./routes/advice')(router)
 require('./routes/comments')(router)
 require('./routes/updates')(router)
 require('./routes/timetable')(router)
+
+
+
+router.post('/examples/create-project-update/schedule', (req, res) => {
+  if(req.session.data.schedule == 'Now') {
+    res.redirect('/examples/create-project-update/status')
+  } else {
+    req.session.data.status = 'Ready to publish'
+    res.redirect('/examples/create-project-update/time')
+  }
+})
