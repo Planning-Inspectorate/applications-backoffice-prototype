@@ -5,6 +5,8 @@
 
 $app-images-path: "/public/images/";
 
+@import "PINS-header";
+
 // Add extra styles here
 @import "components/hidden.scss";
 @import "components/list.scss";

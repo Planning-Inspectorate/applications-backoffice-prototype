@@ -1,0 +1,102 @@
+// Import GOV.UK Frontend and any extension styles if extensions have been configured
+
+.pins-internal-header {
+	box-sizing: border-box;
+  padding: 20px 0;
+  border-bottom: 10px solid #008670;
+	display: table;
+  width: 100%;
+  min-height: 35px;
+}
+
+.app-pi-pins-internal-header__service-name {
+	width: auto;
+	line-height: 1.3157894737;
+}
+
+.pins-internal-header__logo-link {
+	line-height: 22px !important;
+}
+
+.pins-internal-header__logo-link svg {
+	float: none;
+}
+
+.app-pi-govuk-header__navigation {
+	.govuk-header__navigation-list {
+		text-align: right;
+	}
+}
+
+.app-pi-layout-header {
+
+	border-bottom-color: #13A19B;
+
+	.pins-internal-header__logo {
+		width: 30%;
+		float: left;
+		margin-bottom: 0;
+		border-left: 2px solid #008670;
+	}
+
+	.pins-internal-header__logo-text {
+		width: 50%;
+		font-size: 1.125rem;
+		display: -webkit-box;
+		display: flex;
+	  vertical-align: top;
+	  margin: 0 0 0 0;
+	}
+
+	.pins-internal-header__logo-link {
+		text-decoration: none;
+	}
+
+  .govuk-header__link:link,
+  .govuk-header__link:visited,
+  .govuk-header__logotype-text {
+    color: #0b0c0c;
+    font-weight: bold;
+  }
+
+	.pins-internal-header__logo-link:visited {
+		color: #0b0c0c;
+	}
+
+  .govuk-header__navigation-item--active .govuk-header__link {
+	  font-weight: bold;
+	  text-decoration: none;
+  }
+
+}
+
+.govuk-header__navigation-item {
+	display: inline-block;
+  margin-right: 15px;
+  padding: 5px 0;
+  border: 0;
+}
+
+.pins-internal-header__link,
+.pins-internal-header__link:visited {
+	font-size: 24px;
+	color: #0b0c0c !important;
+	text-underline-offset: 0.1578em;
+  font-weight: bold;
+	list-style: none;
+	text-decoration: none;
+}
+
+.govuk-header__link:visited {
+  color: #0b0c0c;
+	font-size: 1rem;
+  line-height: 1.25;
+	list-style: none;
+	text-decoration: none;
+}
+
+.govuk-header__navigation-item--active,
+.govuk-header__navigation-item--active:active,
+.govuk-header__navigation-item--active:visited {
+	color: #10847E;
+}
