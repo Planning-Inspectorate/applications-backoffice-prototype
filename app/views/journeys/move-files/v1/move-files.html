@@ -1,19 +1,65 @@
 {% extends "layouts/nsips-layout.html" %}
 
-{% set title = "Move files" %}
+{% set title = "Move documents" %}
 {% set pageName = title + ' - Planning Inspectorate'%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: applicationUrl
+  }) }}
+{% endblock %}
 
 {% block content %}
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="pins-masthead-summary">
+        <span class="govuk-caption-l">BC0110005</span>
+        <h1 class="govuk-heading-l">
+          Case name 001
+        </h1>
+        <p class="govuk-body">
+          Business and Commercial, Office Use
+        </p>
+        {{govukTag({
+          text: "Pre-application",
+          classes: "govuk-tag--green"
+        })}}
+      </div>
+
+    </div>
+
     <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-l">
+        {{title}}
+      </h2>
+
+      <p class="govuk-body-l folder-name--first">
+        Project
+      </p>
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          href: "#",
+          text: "Move document here"
+        }) }}
+
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          text: "Add new folder"
+        }) }}
+      </div>
 
       {{ govukRadios({
         name: "documentFolder",
         fieldset: {
           legend: {
-            text: title,
-            isPageHeading: true,
-            classes: "govuk-fieldset__legend--l"
+            text: "Main project folder",
+            isPageHeading: false,
+            classes: "govuk-visually-hidden"
           }
         },
         items: [
@@ -77,7 +123,9 @@
       }) }}
 
       {{ govukButton({
-        text: "Continue"
+        classes: "govuk-button--secondary",
+        href: "move-files-2",
+        text: "Open folder"
       }) }}
 
     </div>

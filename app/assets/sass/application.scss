@@ -18,6 +18,8 @@ $app-images-path: "/public/images/";
 @import "components/page-header.scss";
 @import "components/button-menu.scss";
 @import "components/identity-bar.scss";
+@import "components/pins-masthead.scss";
+@import "components/folders.scss";
 
 .app-fat-header {
   background: govuk-colour('light-grey');

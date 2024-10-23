@@ -1,0 +1,112 @@
+{% extends "layouts/nsips-layout.html" %}
+
+{% set title = "Move documents" %}
+{% set pageName = title + ' - Planning Inspectorate'%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: applicationUrl
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="pins-masthead-summary">
+        <span class="govuk-caption-l">BC0110005</span>
+        <h1 class="govuk-heading-l">
+          Case name 001
+        </h1>
+        <p class="govuk-body">
+          Business and Commercial, Office Use
+        </p>
+        {{govukTag({
+          text: "Pre-application",
+          classes: "govuk-tag--green"
+        })}}
+      </div>
+
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-l">
+        {{title}}
+      </h2>
+
+      <p class="govuk-body-l">
+        <a href="#" class="folder-name--first">Project</a>
+        <span class="govuk-hint folder-spacer"> › </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon folder-heading-folder__icon">
+        <style>
+          .svg-folder-icon &gt; path {
+            fill: #dee0e2;
+          }
+          @media (forced-colors: active) {
+            .svg-folder-icon &gt; path {
+              fill: none;
+            }
+          }
+        </style>
+
+        <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+      </svg>
+        <span class="folder-name">
+          Correspondence
+        </span>
+      </p>
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          href: "#",
+          text: "Move document here"
+        }) }}
+
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          text: "Add new folder"
+        }) }}
+      </div>
+
+      {{ govukRadios({
+        name: "documentFolder",
+        fieldset: {
+          legend: {
+            text: "Acceptance",
+            isPageHeading: false,
+            classes: "govuk-visually-hidden"
+          }
+        },
+        items: [
+          {
+            value: "Submitted documents",
+            text: "Submitted documents"
+          },
+          {
+            value: "Scanned files",
+            text: "Scanned files"
+          },
+          {
+            value: "Folder 1",
+            text: "Folder 1"
+          },
+          {
+            value: "Archive",
+            text: "Archive"
+          }
+        ]
+      }) }}
+
+      <div class="govuk-button-group">
+        {{ govukButton({
+          classes: "govuk-button--secondary",
+          text: "Open folder"
+        }) }}
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
