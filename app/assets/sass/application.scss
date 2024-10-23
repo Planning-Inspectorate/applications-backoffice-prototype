@@ -20,6 +20,7 @@ $app-images-path: "/public/images/";
 @import "components/identity-bar.scss";
 @import "components/pins-masthead.scss";
 @import "components/folders.scss";
+@import "components/documents.scss";
 
 .app-fat-header {
   background: govuk-colour('light-grey');

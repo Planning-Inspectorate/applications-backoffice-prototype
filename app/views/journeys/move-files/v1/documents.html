@@ -1,0 +1,265 @@
+{% extends "layouts/nsips-layout.html" %}
+
+{% set title = "Pre-application folder" %}
+{% set pageName = title + ' - Planning Inspectorate'%}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: applicationUrl
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <div class="pins-masthead-summary">
+        <span class="govuk-caption-l">BC0110005</span>
+        <h1 class="govuk-heading-l">
+          Case name 001
+        </h1>
+        <p class="govuk-body">
+          Business and Commercial, Office Use
+        </p>
+        {{govukTag({
+          text: "Pre-application",
+          classes: "govuk-tag--green"
+        })}}
+      </div>
+
+    </div>
+
+    <div class="govuk-grid-column-two-thirds">
+
+      <h2 class="govuk-heading-l">
+        {{title}}
+      </h2>
+
+    </div>
+
+    <div class="govuk-grid-column-full">
+
+      <!-- list of documents -->
+      <details class="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Show subfolders
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+          <ul class="govuk-list">
+            <li>
+              <a href="#" class="govuk-link">
+                Create folder
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+
+                Events / meetings
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                Correspondence
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                EIA
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                Habitat regulations
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                Evidence plans
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                Draft documents
+              </a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon">
+                <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+              </svg>
+              <a href="#" class="govuk-link">
+                Developer’s consultation
+              </a>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+      <h2 class="govuk-heading-m">
+        Documents
+      </h2>
+
+      {{ govukButton({
+        text: "Upload files",
+        classes: "govuk-button--secondary"
+      }) }}
+
+      <p class="govuk-body">
+        <a href="#" class="govuk-link">
+          View publishing queue
+        </a>
+      </p>
+
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    </div>
+
+    <!-- file filters and actions -->
+
+    <!-- file status / filter -->
+    <div class="govuk-grid-column-two-thirds">
+      <div class="pins-files-list__statuses">
+        <h3 class="govuk-heading-s">
+          Statuses
+        </h3>
+
+        <!-- Change statuses -->
+        <details class="govuk-details">
+          <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+              Filter documents
+            </span>
+          </summary>
+          <div class="govuk-details__text">
+
+            <div>
+              {{ govukRadios({
+                classes: "govuk-radios--small",
+                name: "documentFilter",
+                fieldset: {
+                  legend: {
+                    text: "Filter",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--s"
+                  }
+                },
+                items: [
+                  {
+                    value: "Unredacted",
+                    text: "Unredacted"
+                  },
+                  {
+                    value: "Redacted",
+                    text: "Redacted"
+                  }
+                ]
+              }) }}
+
+            </div>
+            <div>
+
+              {{ govukRadios({
+                classes: "govuk-radios--small",
+                name: "documentStatus",
+                fieldset: {
+                  legend: {
+                    text: "Status",
+                    isPageHeading: false,
+                    classes: "govuk-fieldset__legend--s"
+                  }
+                },
+                items: [
+                  {
+                    value: "Not-checked",
+                    text: "Not-checked"
+                  },
+                  {
+                    value: "Not-checked",
+                    text: "Not-checked"
+                  },
+                  {
+                    value: "Do not publish",
+                    text: "Do not publish"
+                  },
+                  {
+                    value: "Ready to publish",
+                    text: "Ready to publish"
+                  }
+                ]
+              }) }}
+
+              <p class="govuk-body">
+                <a href="#" class="govuk-link">
+                  Clear selected
+                </a>
+              </p>
+
+              {{ govukButton({
+                classes: "govuk-button--secondary",
+                href: "#",
+                text: "Apply changes"
+              }) }}
+
+            </div>
+
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- file actions -->
+    <div class="govuk-grid-column-one-third">
+      <div class="pins-files-list__actions">
+        <h3 class="govuk-heading-s">
+          Actions
+        </h3>
+
+        <ul class="govuk-list">
+          <li>
+            <a href="#" class="govuk-link">
+              Download selected
+            </a>
+          </li>
+          <li>
+            <a href="#" class="govuk-link">
+              Unpublish selected
+            </a>
+          </li>
+          <li>
+            <a href="move-files" class="govuk-link">
+              Move selected
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="govuk-grid-column-full">
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  </div>
+{% endblock %}
