@@ -1,6 +1,6 @@
 {% extends "layouts/nsips-layout.html" %}
 
-{% set title = "Move documents" %}
+{% set title = "Create new folder" %}
 {% set pageName = title + ' - Planning Inspectorate'%}
 
 {% block beforeContent %}
@@ -36,6 +36,10 @@
         {{title}}
       </h2>
 
+    </div>
+
+    <div class="govuk-grid-column-full">
+
       <p class="govuk-body-l">
         <a href="move-files" class="govuk-link govuk-link--no-visited-state folder-name--first">Project area</a>
         <span class="govuk-hint folder-spacer"> › </span>
@@ -53,58 +57,46 @@
 
         <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
       </svg>
-        <span class="folder-name">
+        <a href="move-files-2" class="govuk-link govuk-link--no-visited-state folder-name">
           Correspondence
+        </a>
+        <span class="govuk-hint folder-spacer"> › </span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20" aria-hidden="true" focusable="false" class="svg-folder-icon folder-heading-folder__icon">
+        <style>
+          .svg-folder-icon &gt; path {
+            fill: #dee0e2;
+          }
+          @media (forced-colors: active) {
+            .svg-folder-icon &gt; path {
+              fill: none;
+            }
+          }
+        </style>
+
+        <path d="M9.64475,1.25 H1.25 V18.75 H24.75 V5.25 H11.14475z" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" fill="transparent"></path>
+      </svg>
+        <span class="folder-name">
+          Received from appellant
         </span>
       </p>
 
-      <div class="govuk-button-group">
-        {{ govukButton({
-          classes: "govuk-button--secondary",
-          href: "#",
-          text: "Move document here"
-        }) }}
 
-        {{ govukButton({
-          classes: "govuk-button--secondary",
-          text: "Create new folder"
-        }) }}
-      </div>
+    </div>
 
-      {{ govukRadios({
-        name: "documentFolder",
-        fieldset: {
-          legend: {
-            text: "Acceptance",
-            isPageHeading: false,
-            classes: "govuk-visually-hidden"
-          }
+    <div class="govuk-grid-column-two-thirds">
+
+      {{ govukInput({
+        label: {
+          text: "New folder name"
         },
-        items: [
-          {
-            value: "Submitted documents",
-            text: "Submitted documents"
-          },
-          {
-            value: "Scanned files",
-            text: "Scanned files"
-          },
-          {
-            value: "Folder 1",
-            text: "Folder 1"
-          },
-          {
-            value: "Archive",
-            text: "Archive"
-          }
-        ]
+        id: "event-name",
+        name: "eventName"
       }) }}
 
       <div class="govuk-button-group">
         {{ govukButton({
-          classes: "govuk-button--secondary",
-          href: "move-files-3",
-          text: "Open folder"
+          text: "Create new folder",
+          href: "move-files-3?new-folder=true"
         }) }}
       </div>
 
