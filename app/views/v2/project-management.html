@@ -1,0 +1,237 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{{ govukPhaseBanner({
+tag: {
+text: "Prototype",
+classes: "govuk-tag--pink"
+},
+html: 'This is not a full service. It is not production code and you might experience problems.'
+}) }}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{{ govukBreadcrumbs({
+items: [
+{
+text: "Project overview",
+href: "#"
+},
+{
+text: "Project documentation",
+href: "#"
+}
+]
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div class="grey-box">
+      <span class="govuk-caption-xl">EN0110007</span>
+      <h1 class="govuk-heading-xl">Bristol Power Station case</h1>
+      <p class="govuk-!-margin-top-0">Energy, Generating Stations</p>
+      <strong class="govuk-tag govuk-tag--green">Acceptance</strong>
+    </div>
+
+
+    <h1 class="govuk-heading-l">
+      Project management folder
+    </h1>
+
+    {% from "govuk/components/details/macro.njk" import govukDetails %}
+
+    {{ govukDetails({
+    summaryText: "Subfolders",
+    html: '<ul class="govuk-list">
+      <li><a href="#" class="govuk-link">Create folder</a></li>
+      <li><a href="#" class="govuk-link">Folder one</a></li>
+    </ul>'
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+
+    <h3 class="govuk-heading-m"> Documents</h3>
+    <p class="govuk-body"> This folder contains 5 documents. Showing 1 - 5 documents</p>
+
+    {% from "govuk/components/button/macro.njk" import govukButton %}
+
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      {{ govukButton({
+      text: "Upload files",
+      classes: "govuk-button--secondary",
+      href: "file-upload.html"
+      }) }}
+
+      <p class="govuk-body" style="margin: 0;">
+        <a href="#" class="govuk-link">View publishing queue</a>
+      </p>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+  </div>
+</div>
+
+<div class="govuk-grid-row equal-height">
+
+  <!-- Status section -->
+  <div class="govuk-grid-column-two-thirds">
+    <div class="grey-box">
+      <form autocomplete="off" class="status" action="status?project={{projectNo}}" method="post"
+        onsubmit="return validateStatusLib(event)">
+        <div class="govuk-form-group status">
+          <h4 id="select-status" class="govuk-heading-s">Statuses</h4>
+        </div>
+
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-third">
+            {% from "govuk/components/radios/macro.njk" import govukRadios %}
+            {{ govukRadios({
+              name: "redaction",
+              fieldset: {
+                legend: {
+                  text: "Redaction",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                { value: "Unredacted", text: "Unredacted" },
+                { value: "Redacted", text: "Redacted" }
+              ]
+            }) }}
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+            {{ govukRadios({
+              name: "status",
+              classes: "status",
+              fieldset: {
+                legend: {
+                  text: "Status",
+                  isPageHeading: false,
+                  classes: "govuk-fieldset__legend--s"
+                }
+              },
+              items: [
+                { value: "Checked", text: "Checked" },
+                { value: "Not Checked", text: "Not checked" },
+                { value: "Ready to publish", text: "Ready to publish" },
+                { value: "Do not publish", text: "Do not publish" }
+              ]
+            }) }}
+          </div>
+
+          <div class="govuk-grid-column-one-third">
+            <button class="govuk-button">Apply changes</button>
+            <p class="govuk-body clear-all"><a href="">Clear selected</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Actions section -->
+  <div class="govuk-grid-column-one-third">
+    <div class="grey-box">
+      <h4 class="govuk-heading-s">Document actions</h4>
+      <ul class="govuk-list">
+        <li><a href="#">Download selected</a></li>
+        <li><a href="#">Move selected</a></li>
+        <li><a href="#">Unpublish selected</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-two-thirds">
+
+  <h3 class="govuk-heading-s">Select documents to make changes to statuses</h3>
+  <p class="govuk-body">This folder contains 5 document(s). Showing 1 - 5 document(s).
+  </p>
+  <p class="govuk-body">0 document(s) selected
+  </p>
+
+  </div>
+
+
+<div class="govuk-grid-column-full">
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th scope="col" class="govuk-table__header">Select</th>
+      <th scope="col" class="govuk-table__header">Document information</th>
+      <th scope="col" class="govuk-table__header">Date received</th>
+      <th scope="col" class="govuk-table__header">Redaction</th>
+      <th scope="col" class="govuk-table__header">Status</th>
+      <th scope="col" class="govuk-table__header">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+
+    <!-- Row 1 – Select All -->
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="select-all" name="select-all" type="checkbox" value="select-all">
+            <label class="govuk-label govuk-checkboxes__label" for="select-all"></label>
+          </div>
+        </div>
+      </td>
+      <td class="govuk-table__cell">Select all documents on page</td>
+      <td class="govuk-table__cell"></td>
+      <td class="govuk-table__cell"></td>
+      <td class="govuk-table__cell"></td>
+      <td class="govuk-table__cell"></td>
+    </tr>
+
+    <!-- Rows 2–6 -->
+    {% for i in [1,2,3,4,5] %}
+    <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+        <div class="govuk-checkboxes govuk-checkboxes--small">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="doc-{{ i }}" name="document-select-{{ i }}" type="checkbox"
+              value="doc-{{ i }}">
+            <label class="govuk-label govuk-checkboxes__label" for="doc-{{ i }}"></label>
+          </div>
+        </div>
+      </td>
+      <td class="govuk-table__cell">
+        <strong><a href="#" class="govuk-link">Document_{{ i }}.pdf</a></strong><br>
+        From: John Smith<br>
+        File type and size: PDF, 1.2MB
+      </td>
+      <td class="govuk-table__cell">12 April 2025</td>
+      <td class="govuk-table__cell">Unredacted</td>
+      <td class="govuk-table__cell">Not checked</td>
+      <td class="govuk-table__cell">
+        <ul class="govuk-list govuk-list--spaced">
+          <li><a href="document-properties" class="govuk-link">View/edit properties</a></li>
+          <li><a href="#" class="govuk-link">Download</a></li>
+          <li><a href="#" class="govuk-link">Open in Adobe</a></li>
+        </ul>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+
+{% endblock %}

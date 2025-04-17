@@ -1,0 +1,29 @@
+{% extends '_layouts/layout.html' %}
+
+{# Add a body class to override things if needed #}
+{% set bodyClasses = 'internal' %}
+
+{# Add the title(h1) to page title if it's set, add to each page with:
+{% set title = 'Example' %} #}
+
+{% set projectNo = projectNo %}
+
+{% block pageTitle %}
+	{{ title+' –' if title }} {{ serviceName }} – Planning Inspectorate
+{% endblock %}
+
+{% block beforeContent %}
+
+	{{ appBanner({
+		project: {
+			projectNo: projectNo,
+			projectCase: data[projectNo]['projectdetails']['project-case-number'],
+			projectName: data[projectNo]['projectdetails']['project-name'],
+			projectName: data[projectNo]['projectdetails']['project-name'],
+			projectSector: data[projectNo]['projectdetails']['project-sector'],
+			projectSubsector: data[projectNo]['projectdetails']['project-subsector'],
+			projectStage: data[projectNo]['projectdetails']['project-stage']
+		}
+	}) }}
+
+{% endblock %}

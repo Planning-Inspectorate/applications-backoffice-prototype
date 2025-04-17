@@ -1,0 +1,146 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{{ govukPhaseBanner({
+tag: {
+text: "Prototype",
+classes: "govuk-tag--pink"
+},
+html: 'This is not a full service. It is not production code and you might experience problems.'
+}) }}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{{ govukBreadcrumbs({
+items: [
+{
+text: "Project overview",
+href: "#"
+},
+{
+text: "Project documentation",
+href: "#"
+},
+{
+text: "Project management",
+href: "prject-management"
+}
+]
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Upload files in Project management folder
+    </h1>
+
+    <p>
+      Choose a single or multiple files to upload.
+    </p>
+    <p>
+      Your file must be DBF, DOC, DOCX, HTML, JPEG, JPG, MOV, MP3, MP4, MPEG, MSG, PDF, PNG, PPT, PPTX, PRJ, SHP, SHX, TIF, TIFF, XLS, or XLSX.
+    </p>
+    <p>
+      The total of your uploaded files must be smaller than 1 GB.
+    </p>
+
+    <p class="govuk-body" aria-live="polite">1 of 2 files uploaded</p>
+
+    <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+      Add more files
+    </button>
+
+    <p class="govuk-body govuk-!-display-none" id="refreshPageProgress"><a href="#" class="govuk-link">Refresh page to update file upload progress</a></p>
+
+    <dl class="govuk-summary-list govuk-summary-list--long-key">
+      <div class="govuk-summary-list__row" id="uploading-row">
+        <dt class="govuk-summary-list__key">
+          receipt2.jpg
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <span id="upload-progress" class="govuk-body">Uploading: <span id="progress-percent">0%</span></span>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Cancel<span class="govuk-visually-hidden"> receipt2.jpg</span></a>
+        </dd>
+      </div>
+    
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">receipt1.jpg</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">Uploaded</strong>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt1.jpg</span></a>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="govuk-inset-text">
+      Saving files will default them to ‘Unredacted’ and ‘Not checked’
+    </div>
+
+    <a href="project-management" class="govuk-button" role="button" data-module="govuk-button">
+      Save and return
+    </a>
+    
+
+  </div>
+</div>
+
+
+<script>
+  let percent = 0;
+  const progressEl = document.getElementById('progress-percent');
+  const uploadingRow = document.getElementById('uploading-row');
+  const fileCountText = document.querySelector('[aria-live="polite"]');
+
+  const interval = setInterval(() => {
+    percent++;
+    progressEl.textContent = percent + '%';
+
+    if (percent >= 100) {
+      clearInterval(interval);
+
+      // Replace the uploading row with the "uploaded" HTML
+      uploadingRow.innerHTML = `
+        <dt class="govuk-summary-list__key">
+          <a class="govuk-link" href="#">receipt2.jpg</a>
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <strong class="govuk-tag govuk-tag--green">Uploaded</strong>
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="#">Remove<span class="govuk-visually-hidden"> receipt2.jpg</span></a>
+        </dd>
+      `;
+
+      // Update the file count
+      fileCountText.textContent = '2 of 2 files uploaded';
+
+      // Optional redirect after a short delay
+      // setTimeout(() => {
+      //   window.location.href = 'files-uploaded.html';
+      // }, 1000);
+    }
+  }, 50);
+
+
+</script>
+
+
+{% endblock %}

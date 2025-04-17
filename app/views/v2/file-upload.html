@@ -1,0 +1,75 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{{ govukPhaseBanner({
+tag: {
+text: "Prototype",
+classes: "govuk-tag--pink"
+},
+html: 'This is not a full service. It is not production code and you might experience problems.'
+}) }}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{{ govukBreadcrumbs({
+items: [
+{
+text: "Project overview",
+href: "#"
+},
+{
+text: "Project documentation",
+href: "#"
+},
+{
+text: "Project management",
+href: "project-management"
+}
+]
+}) }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-l">
+      Upload files to Project management folder
+    </h1>
+
+    <p>
+      Choose a single or multiple files to upload.
+    </p>
+    <p>
+      Your file must be DBF, DOC, DOCX, HTML, JPEG, JPG, MOV, MP3, MP4, MPEG, MSG, PDF, PNG, PPT, PPTX, PRJ, SHP, SHX, TIF, TIFF, XLS, or XLSX.
+    </p>
+    <p>
+      The total of your uploaded files must be smaller than 1 GB.
+    </p>
+
+    <a href="file-uploading" class="govuk-button govuk-button--secondary" role="button" data-module="govuk-button">
+      Choose file
+    </a>
+    
+
+    <div class="govuk-inset-text">
+      Saving files will default them to ‘Unredacted’ and ‘Not checked’
+    </div>
+
+    <a href="project-management" class="govuk-button" role="button" data-module="govuk-button">
+      Save and return
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}
