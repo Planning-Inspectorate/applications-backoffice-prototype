@@ -48,3 +48,9 @@ router.post('/examples/create-project-update/schedule', (req, res) => {
     res.redirect('/examples/create-project-update/time')
   }
 })
+
+
+const applications = require('./data/applications-v2.json'); // or .json
+router.get('/v2/applications', function (req, res) {
+  res.render('/v2/applications', { categories: applications });
+});

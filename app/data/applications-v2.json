@@ -1,0 +1,39 @@
+[
+    {
+      "category": "Business and commercial",
+      "projects": [
+        {
+          "ref": "0CRV0097360",
+          "name": "Longfield Solar Farm",
+          "status": "Pre-application",
+          "tagClass": "govuk-tag--green"
+        },
+        {
+          "ref": "00000 000 000",
+          "name": "HyNet Carbon Dioxide Pipeline",
+          "status": "Examination",
+          "tagClass": "govuk-tag--purple"
+        }
+      ]
+    },
+    {
+      "category": "Energy",
+      "projects": [
+        {
+          "ref": "1234 000",
+          "name": "A12 Chelmsford to A120 Widening Scheme",
+          "status": "Acceptance",
+          "tagClass": "govuk-tag--turquoise"
+        }
+      ]
+    },
+    {
+      "category": "Transport",
+      "projects": []
+    },
+    {
+      "category": "Water",
+      "projects": []
+    }
+  ]
+  
