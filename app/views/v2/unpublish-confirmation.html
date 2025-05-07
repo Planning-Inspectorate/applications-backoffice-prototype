@@ -1,0 +1,28 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Confirmation page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {{ govukPanel({
+        titleText: "Representations successfully unpublished",
+        html: "Case<br><strong>ABC 123</strong>",
+        html: "Your reference number<br><strong>HDJ2123F</strong>"
+      }) }}
+
+      <p>
+        <a href="relevant-representations-2">
+          Go back to Relevant representations
+        </a>
+      </p>
+
+
+    </div>
+  </div>
+
+{% endblock %}

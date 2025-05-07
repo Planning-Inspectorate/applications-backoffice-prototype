@@ -1,0 +1,88 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{{ govukBackLink({
+text: "Back to applications",
+href: "javascript:window.history.back()"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div class="grey-box">
+      <span class="govuk-caption-xl">EN0110007</span>
+      <h1 class="govuk-heading-xl">London Power Station case</h1>
+      <p class="govuk-!-margin-top-0">Energy, Generating Stations</p>
+      <div class="govuk-button-group">
+        <strong class="govuk-tag govuk-tag--green govuk-!-margin-right-3">Acceptance</strong>
+        <a class="govuk-link" href="#">View live published project (opens in new tab)</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .side-nav {
+      padding-right: 20px;
+    }
+
+    .side-nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .side-nav li {
+      margin-bottom: 5px;
+    }
+
+    .side-nav a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #1d70b8;
+      border-left: 5px solid transparent;
+    }
+
+    .side-nav a:hover {
+      background-color: #f3f2f1;
+    }
+
+    .side-nav a.selected {
+      background-color: #f3f2f1;
+      font-weight: bold;
+      border-left: 5px solid #1d70b8;
+      color: #0b0c0c;
+    }
+  </style>
+  <div class="govuk-grid-column-one-quarter">
+    <nav class="side-nav">
+      <ul class="govuk-list">
+        <li><a href="project-overview">Overview</a></li>
+        <li><a href="key-dates">Key dates</a></li>
+        <li><a href="project-team"class="selected">Project team</a></li>
+        <li><a href="project-documentation">Project documentation</a></li>
+        <li><a href="project-updates">Project updates</a></li>
+        <li><a href="exam-timetable">Exam timetable</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="govuk-grid-column-three-quarters">
+
+    <h2 class="govuk-heading-m">Project team</h2>
+
+  </div>
+</div>
+
+
+
+{% endblock %}

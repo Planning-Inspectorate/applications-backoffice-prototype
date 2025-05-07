@@ -1,0 +1,94 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+text: "Back to project overview",
+href: "project-overview"
+}) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div class="grey-box">
+      <span class="govuk-caption-xl">EN0110007</span>
+      <h1 class="govuk-heading-xl">London Power Station case</h1>
+      <p class="govuk-!-margin-top-0">Energy, Generating Stations</p>
+      <div class="govuk-button-group">
+        <strong class="govuk-tag govuk-tag--green govuk-!-margin-right-3">Acceptance</strong>
+        <a class="govuk-link" href="#">View live published project (opens in new tab)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-two-thirds">
+
+    <div class="govuk-form-group">
+      <label class="govuk-label govuk-label--m" for="event-name">
+        Project documentation
+      </label>
+      <div id="event-name-hint" class="govuk-hint">
+        All documents relating to the project
+      </div>
+
+      <input class="govuk-input govuk-!-width-two-thirds" id="two-thirds" name="oneHalf" type="text">
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Search
+      </button>
+    </div>
+
+    <ul class="govuk-list">
+      <li>
+        <a class="govuk-link govuk-heading-s" href="project-management">Project management</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Correspondence</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Legal advice</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Transboundary</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Land rights</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">S51 advice</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Pre-application</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Acceptance</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Pre-examination</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Relevant representations</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Examination</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Recommendation</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Decision</a>
+      </li>
+      <li>
+        <a class="govuk-link govuk-heading-s" href="#">Post-decision</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

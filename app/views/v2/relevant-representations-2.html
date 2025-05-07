@@ -1,0 +1,300 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+Content page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block beforeContent %}
+
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{{ govukPhaseBanner({
+tag: {
+text: "Prototype",
+classes: "govuk-tag--pink"
+},
+html: 'This is not a full service. It is not production code and you might experience problems.'
+}) }}
+
+{% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
+
+{{ govukBreadcrumbs({
+items: [
+{
+text: "Home",
+href: "#"
+},
+{
+text: "London Power Station",
+href: "project-overview"
+},
+{
+text: "Project documentation",
+href: "project-documentation"
+}
+,
+{
+text: "Relevant representations"
+}
+]
+}) }}
+
+{% endblock %}
+
+{% block content %}
+<!--test-->
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+
+    <div class="grey-box">
+      <span class="govuk-caption-xl">EN0110007</span>
+      <h1 class="govuk-heading-xl">London Power Station case</h1>
+      <p class="govuk-!-margin-top-0">Energy, Generating Stations</p>
+      <div class="govuk-button-group">
+        <strong class="govuk-tag govuk-tag--green govuk-!-margin-right-3">Acceptance</strong>
+        <a class="govuk-link" href="#">View live published project (opens in new tab)</a>
+      </div>    </div>
+
+    <hr class="govuk-section-break govuk-section-break--l">
+    <h1 class="govuk-heading-l">
+      Relevant representations
+    </h1>
+
+
+
+    <div class="govuk-grid-row equal-height">
+
+      <!-- Status section -->
+      <div class="govuk-grid-column-one-half">
+        <div class="grey-box">
+          <form autocomplete="off" class="status" action="status?project={{projectNo}}" method="post"
+            onsubmit="return validateStatusLib(event)">
+            <div class="govuk-form-group status">
+              <h4 id="select-status" class="govuk-heading-s">Filter</h4>
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-one-half">
+                {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+                {{ govukCheckboxes({
+                name: "redaction",
+                fieldset: {
+                legend: {
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+                }
+                },
+                items: [
+                { value: "AwaitingReview", text: "Awaiting review (0)" },
+                { value: "Draft", text: "Draft (2)" },
+                { value: "Referred", text: "Referred (0)" },
+                { value: "Invalid", text: "Invalid (0)" },
+                { value: "Under 18", text: "Under 18 (0)" }
+                ]
+                }) }}
+
+                <button class="govuk-button">Apply filters</button>
+
+              </div>
+
+              <div class="govuk-grid-column-one-half">
+                {{ govukCheckboxes({
+                name: "status",
+                classes: "status",
+                fieldset: {
+                legend: {
+
+                isPageHeading: false,
+                classes: "govuk-fieldset__legend--s"
+                }
+                },
+                items: [
+                { value: "Valid", text: "Valid (20)" },
+                { value: "Published", text: "Published (0)" },
+                { value: "Withdrawn", text: "Withdrawn (0)" },
+                { value: "Unpublished", text: "Unpublished (3790)" },
+                { value: "Archived", text: "Archived (0)" }
+                ]
+                }) }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Key dates section -->
+      <div class="govuk-grid-column-one-half">
+
+        <h3 class="govuk-heading-m">Key dates</h3>
+        <h4 class="govuk-heading-s">30 April 2025</h4>
+        <p class"govuk-body">Closed date</p>
+        <h4 class="govuk-heading-s">29 April 2025</h4>
+        <p class="govuk-body">Published date</p>
+
+        <div class="govuk-button-group">
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Add a representation
+          </button>
+          <a href="unpublish-representations.html" role="button" class="govuk-button govuk-button--secondary">
+            Unpublish all
+          </a>
+        </div>
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link">Download valid and published representations (CSV)</a>
+        </p>
+      </div>
+
+      <div class="govuk-grid-column-two-thirds">
+
+        <p class="govuk-body">
+          <a href="#" class="govuk-link">View publishing queue</a>
+        </p>
+
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--m" for="event-name">
+            Search representations
+          </label>
+          
+          <input class="govuk-input govuk-!-width-one-half" id="one-half" name="oneHalf" type="text">
+
+          <button type="submit" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            Search
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="govuk-grid-column-full">
+
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Reference</th>
+            <th scope="col" class="govuk-table__header">From</th>
+            <th scope="col" class="govuk-table__header">Date received</th>
+            <th scope="col" class="govuk-table__header">Redacted</th>
+            <th scope="col" class="govuk-table__header">Status</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">B100000024</td>
+            <td class="govuk-table__cell">John Smith</td>
+            <td class="govuk-table__cell">13 Jan 2025</td>
+            <td class="govuk-table__cell">Redacted</td>
+            <td class="govuk-table__cell"><strong class="govuk-tag">
+              Valid
+            </strong></td>
+            <td class="govuk-table__cell"><a href="#">Review</a></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    {% endblock %}
