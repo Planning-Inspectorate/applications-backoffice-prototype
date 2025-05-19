@@ -1,48 +1,50 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+Question page template – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukBackLink({
-  text: "Back",
-  href: "relevant-representations"
+{{ govukBackLink({
+text: "Back",
+href: "relevant-representations"
 }) }}
 {% endblock %}
 
 {% block content %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">
-        Unpublish relevant representations
-      </h1>
+    <h1 class="govuk-heading-l">
+      Unpublish relevant representations
+    </h1>
 
 
-        <p>
-          <strong>Project name: </strong>Longfield Solar Farm
-        </p>
+    <p>
+      <strong>Project name: </strong>Longfield Solar Farm
+    </p>
 
-        <p>
-          There are <strong>3790 </strong>published representations.
-        </p>
+    <p>
+      There are <strong>3790 </strong>published representations.
+    </p>
 
-        <p>
-          Unpublishing will remove these representations from the external website.
-        </p>
+    <p>
+      Unpublishing will remove these representations from the external website.
+    </p>
 
-        <div class="govuk-inset-text">
-          You can republish a representation by changing its status to "Valid" and selecting "Publish representations" from the publishing queue.         </div>
-
-          <a href="unpublish-confirmation.html" role="button" class="govuk-button govuk-button--warning">
-            Unpublish all representations
-          </a>
-
-      </form>
-
+    <div class="govuk-inset-text">
+      You can republish a representation by changing its status to "Valid" and selecting "Publish representations" from
+      the publishing queue. 
     </div>
+
+    <a href="relevant-representations-2.html" role="button" class="govuk-button govuk-button--warning">
+      Unpublish all representations
+    </a>
+
+    </form>
+
   </div>
+</div>
 
 {% endblock %}
