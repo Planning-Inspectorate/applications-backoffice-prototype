@@ -1,4 +1,8 @@
 const govukPrototypeKit = require('govuk-prototype-kit')
+
+const {applyAzureHostingFix} = require('./azure-hosting-fix');
+applyAzureHostingFix();
+
 const router = govukPrototypeKit.requests.setupRouter()
 
 const flash = require('connect-flash')
